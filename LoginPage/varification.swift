@@ -8,7 +8,7 @@
 import Foundation
 
 // Model for the Login API Response
-struct LoginResponse: Codable {
+struct LoginResponses: Codable {
     var status: String  // Status of the request (e.g., "success", "failure")
     var message: String  // Message to describe the result (e.g., "OTP sent", "Invalid number")
     var data: LoginData?  // Optional data field (for example, OTP sent time or session info)

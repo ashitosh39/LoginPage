@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Second View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="LoginPage" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="SecondViewController" customModule="LoginPage" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -111,9 +111,6 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain"/>
-                                                <connections>
-                                                    <action selector="loginBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3RK-Nv-GG2"/>
-                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" name="appGreenColor"/>
@@ -185,10 +182,10 @@
             </objects>
             <point key="canvasLocation" x="2834.3511450381679" y="-34.507042253521128"/>
         </scene>
-        <!--Varification View Controller-->
+        <!--Third View Controller-->
         <scene sceneID="GiV-Xh-Rxg">
             <objects>
-                <viewController storyboardIdentifier="VarificationViewController" id="OWX-6w-Sli" customClass="VarificationViewController" customModule="LoginPage" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="thirdViewController" id="OWX-6w-Sli" customClass="thirdViewController" customModule="LoginPage" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OUO-wN-HUb">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -203,7 +200,7 @@
                                         </constraints>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginImage3" translatesAutoresizingMaskIntoConstraints="NO" id="Rqz-wp-Axa">
-                                        <rect key="frame" x="289" y="40" width="87" height="86"/>
+                                        <rect key="frame" x="289.33333333333331" y="40" width="86.666666666666686" height="86"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="86" id="wU9-JK-zBe"/>
                                         </constraints>
@@ -473,6 +470,8 @@
                                 <color key="backgroundColor" name="splashScreenBgColor"/>
                                 <constraints>
                                     <constraint firstItem="RWW-Z6-pTD" firstAttribute="centerY" secondItem="Rqz-wp-Axa" secondAttribute="centerY" id="1oN-Fq-D14"/>
+                                    <constraint firstItem="RWW-Z6-pTD" firstAttribute="top" secondItem="Rqz-wp-Axa" secondAttribute="bottom" constant="-70" id="2Yc-2p-Wfi"/>
+                                    <constraint firstItem="RWW-Z6-pTD" firstAttribute="leading" secondItem="Rqz-wp-Axa" secondAttribute="trailing" constant="-70.333333333333314" id="5Ju-VJ-QwZ"/>
                                     <constraint firstItem="nZv-oa-Y0l" firstAttribute="leading" secondItem="qyt-AR-K17" secondAttribute="trailing" constant="5" id="5qQ-aM-aUw"/>
                                     <constraint firstItem="AhK-a4-7Zf" firstAttribute="top" secondItem="D8V-dv-wh2" secondAttribute="bottom" constant="42" id="63M-gr-rZX"/>
                                     <constraint firstItem="i8I-La-Acv" firstAttribute="top" secondItem="1mQ-ML-nQe" secondAttribute="bottom" constant="32" id="67B-rS-HLF"/>
@@ -490,7 +489,6 @@
                                     <constraint firstItem="nZv-oa-Y0l" firstAttribute="centerY" secondItem="1mQ-ML-nQe" secondAttribute="centerY" id="VLo-Oc-SQ0"/>
                                     <constraint firstAttribute="trailing" secondItem="D8V-dv-wh2" secondAttribute="trailing" constant="17" id="YDI-mF-j2f"/>
                                     <constraint firstItem="t7z-fU-ltA" firstAttribute="trailing" secondItem="i8I-La-Acv" secondAttribute="trailing" id="dU7-IQ-2LM"/>
-                                    <constraint firstItem="D8V-dv-wh2" firstAttribute="top" secondItem="Rqz-wp-Axa" secondAttribute="bottom" constant="-86" id="heI-oZ-6od"/>
                                     <constraint firstAttribute="trailing" secondItem="KRU-xi-sdW" secondAttribute="trailing" constant="170" id="iT7-KB-TMJ"/>
                                     <constraint firstItem="Rqz-wp-Axa" firstAttribute="trailing" secondItem="D8V-dv-wh2" secondAttribute="trailing" id="kBa-dB-iHq"/>
                                     <constraint firstItem="Rqz-wp-Axa" firstAttribute="top" secondItem="D8V-dv-wh2" secondAttribute="top" id="nxp-gl-EFh"/>

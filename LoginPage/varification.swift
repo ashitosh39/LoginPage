@@ -8,24 +8,59 @@
 import Foundation
 
 // Model for the Login API Response
-struct LoginResponses: Codable {
-    var status: String  // Status of the request (e.g., "success", "failure")
-    var message: String  // Message to describe the result (e.g., "OTP sent", "Invalid number")
-    var data: LoginData?  // Optional data field (for example, OTP sent time or session info)
+
+struct OTPRespons: Codable {
+    let status: Int?
+    let message: String?
+    let result: OTPResponsResult?
     
-    struct LoginData: Codable {
-        var otpSent: Bool  // A flag to indicate whether OTP was sent
-        var mobile: String  // The mobile number to confirm the login
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(self.status, forKey: .status)
+        try container.encodeIfPresent(self.message, forKey: .message)
+        try container.encodeIfPresent(self.result, forKey: .result)
     }
     
-    // You can create an initializer for default values if needed
-    init(status: String, message: String, data: LoginData? = nil) {
-        self.status = status
-        self.message = message
-        self.data = data
+    enum CodingKeys: CodingKey {
+        case status
+        case message
+        case result
+    }
+    
+    init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.status = try container.decodeIfPresent(Int.self, forKey: .status)
+        self.message = try container.decodeIfPresent(String.self, forKey: .message)
+        self.result = try container.decodeIfPresent(OTPResponsResult.self, forKey: .result)
     }
 }
 
+// MARK: - Result
+struct OTPResponsResult: Codable {
+    let token: String?
+    let customerID: Int?
+    let isRefferalScreen: Bool?
+
+    enum CodingKeys: String, CodingKey {
+        case token
+        case customerID = "customer_id"
+        case isRefferalScreen = "is_refferal_screen"
+    }
+    
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(self.token, forKey: .token)
+        try container.encodeIfPresent(self.customerID, forKey: .customerID)
+        try container.encodeIfPresent(self.isRefferalScreen, forKey: .isRefferalScreen)
+    }
+    
+    init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.token = try container.decodeIfPresent(String.self, forKey: .token)
+        self.customerID = try container.decodeIfPresent(Int.self, forKey: .customerID)
+        self.isRefferalScreen = try container.decodeIfPresent(Bool.self, forKey: .isRefferalScreen)
+    }
+}
 
 
 

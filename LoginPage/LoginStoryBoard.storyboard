@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="aou-YG-228">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -57,7 +58,7 @@
                                             <constraint firstAttribute="height" constant="14" id="mww-gl-KBT"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lgN-Kd-fbF">
@@ -66,7 +67,7 @@
                                             <constraint firstAttribute="height" constant="12" id="9hx-t1-OPd"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                        <color key="textColor" name="phoneNoColorLabel"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Please enter phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="u8p-xT-akV">
@@ -74,6 +75,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="pCI-jX-VaW"/>
                                         </constraints>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -177,7 +179,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="811" y="-71"/>
+            <point key="canvasLocation" x="871" y="-71"/>
         </scene>
         <!--Verification View Controller-->
         <scene sceneID="CeY-3K-Vek">
@@ -188,16 +190,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2uw-IR-y1I">
-                                <rect key="frame" x="0.0" y="59" width="376" height="759"/>
+                                <rect key="frame" x="0.0" y="59" width="1074" height="759"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginImage" translatesAutoresizingMaskIntoConstraints="NO" id="yFn-UC-wge">
-                                        <rect key="frame" x="17" y="40" width="342" height="405"/>
+                                        <rect key="frame" x="17" y="40" width="1040" height="405"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="405" id="a96-OZ-qhV"/>
                                         </constraints>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginImage4" translatesAutoresizingMaskIntoConstraints="NO" id="cBN-za-YoM">
-                                        <rect key="frame" x="254" y="40" width="106" height="106"/>
+                                        <rect key="frame" x="952" y="40" width="106" height="106"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="106" id="Lqc-no-02w"/>
                                             <constraint firstAttribute="width" constant="106" id="hgL-Dx-gmp"/>
@@ -219,11 +221,11 @@
                                             <constraint firstAttribute="width" constant="168" id="0Rm-jl-Fo2"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WZA-ah-OpY">
-                                        <rect key="frame" x="337" y="535" width="22" height="14"/>
+                                        <rect key="frame" x="1035" y="535" width="22" height="14"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="14" id="Chk-PP-aEh"/>
                                             <constraint firstAttribute="width" constant="22" id="eKP-8h-trW"/>
@@ -234,23 +236,24 @@
                                         </buttonConfiguration>
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="editicon" translatesAutoresizingMaskIntoConstraints="NO" id="MF3-y0-nIj">
-                                        <rect key="frame" x="318" y="535" width="14" height="14"/>
+                                        <rect key="frame" x="1016" y="535" width="14" height="14"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="14" id="8cj-aC-TgQ"/>
                                             <constraint firstAttribute="width" constant="14" id="Pyk-aZ-gjj"/>
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ybs-NP-piU">
-                                        <rect key="frame" x="24" y="569" width="328" height="15"/>
+                                        <rect key="frame" x="24" y="569" width="1026" height="15"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Prz-cV-ip2">
-                                                <rect key="frame" x="0.0" y="0.0" width="46.333333333333336" height="15"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="162.66666666666666" height="15"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mx4-y7-DRJ">
-                                                        <rect key="frame" x="0.0" y="0.0" width="46.333333333333336" height="15"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mx4-y7-DRJ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="162.66666666666666" height="15"/>
                                                         <color key="backgroundColor" name="splashScreenBgColor"/>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                                                     </textField>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -262,13 +265,14 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l0i-Ft-fdu">
-                                                <rect key="frame" x="56.333333333333329" y="0.0" width="46.333333333333329" height="15"/>
+                                                <rect key="frame" x="172.66666666666669" y="0.0" width="162.66666666666669" height="15"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yam-l0-kDK">
-                                                        <rect key="frame" x="0.0" y="0.0" width="46.333333333333336" height="15"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yam-l0-kDK">
+                                                        <rect key="frame" x="0.0" y="0.0" width="162.66666666666666" height="15"/>
                                                         <color key="backgroundColor" name="splashScreenBgColor"/>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                                                     </textField>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -280,13 +284,14 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q4n-Gt-zOJ">
-                                                <rect key="frame" x="112.66666666666664" y="0.0" width="46.333333333333329" height="15"/>
+                                                <rect key="frame" x="345.33333333333331" y="0.0" width="162.66666666666669" height="15"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TpB-VR-nki">
-                                                        <rect key="frame" x="0.0" y="0.0" width="46.333333333333336" height="15"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TpB-VR-nki">
+                                                        <rect key="frame" x="0.0" y="0.0" width="162.66666666666666" height="15"/>
                                                         <color key="backgroundColor" name="splashScreenBgColor"/>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                                                     </textField>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -298,13 +303,14 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HfK-Wb-crK">
-                                                <rect key="frame" x="169" y="0.0" width="46.333333333333343" height="15"/>
+                                                <rect key="frame" x="518" y="0.0" width="162.66666666666663" height="15"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rod-H0-iWV">
-                                                        <rect key="frame" x="0.0" y="0.0" width="46.333333333333336" height="15"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rod-H0-iWV">
+                                                        <rect key="frame" x="0.0" y="0.0" width="162.66666666666666" height="15"/>
                                                         <color key="backgroundColor" name="splashScreenBgColor"/>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                                                     </textField>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -316,13 +322,14 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6ep-Ge-Qhn">
-                                                <rect key="frame" x="225.33333333333334" y="0.0" width="46.333333333333343" height="15"/>
+                                                <rect key="frame" x="690.66666666666663" y="0.0" width="162.66666666666663" height="15"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="79a-a5-u7X">
-                                                        <rect key="frame" x="0.0" y="0.0" width="46.333333333333336" height="15"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="79a-a5-u7X">
+                                                        <rect key="frame" x="0.0" y="0.0" width="162.66666666666666" height="15"/>
                                                         <color key="backgroundColor" name="splashScreenBgColor"/>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                                                     </textField>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -334,13 +341,14 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7L7-Wh-2dL">
-                                                <rect key="frame" x="281.66666666666669" y="0.0" width="46.333333333333314" height="15"/>
+                                                <rect key="frame" x="863.33333333333337" y="0.0" width="162.66666666666663" height="15"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tzi-yT-0V0">
-                                                        <rect key="frame" x="0.0" y="0.0" width="46.333333333333336" height="15"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tzi-yT-0V0">
+                                                        <rect key="frame" x="0.0" y="0.0" width="162.66666666666666" height="15"/>
                                                         <color key="backgroundColor" name="splashScreenBgColor"/>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                                                     </textField>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -357,45 +365,45 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="nmp-Y1-V1u">
-                                        <rect key="frame" x="24" y="598" width="328" height="1"/>
+                                        <rect key="frame" x="24" y="598" width="1026" height="1"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o9o-Ux-ATM">
-                                                <rect key="frame" x="0.0" y="0.0" width="46.333333333333336" height="1"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="162.66666666666666" height="1"/>
                                                 <color key="backgroundColor" name="otpColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="uOU-tL-6QT"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zp9-vr-IPI">
-                                                <rect key="frame" x="56.333333333333329" y="0.0" width="46.333333333333329" height="1"/>
+                                                <rect key="frame" x="172.66666666666669" y="0.0" width="162.66666666666669" height="1"/>
                                                 <color key="backgroundColor" name="otpColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="qOd-AU-qT8"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sXv-iV-BLW">
-                                                <rect key="frame" x="112.66666666666664" y="0.0" width="46.333333333333329" height="1"/>
+                                                <rect key="frame" x="345.33333333333331" y="0.0" width="162.66666666666669" height="1"/>
                                                 <color key="backgroundColor" name="otpColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="7dP-4s-N2P"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Ml-GP-j8K">
-                                                <rect key="frame" x="169" y="0.0" width="46.333333333333343" height="1"/>
+                                                <rect key="frame" x="518" y="0.0" width="162.66666666666663" height="1"/>
                                                 <color key="backgroundColor" name="otpColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="o2O-DJ-2Kc"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oyS-Za-Be8">
-                                                <rect key="frame" x="225.33333333333334" y="0.0" width="46.333333333333343" height="1"/>
+                                                <rect key="frame" x="690.66666666666663" y="0.0" width="162.66666666666663" height="1"/>
                                                 <color key="backgroundColor" name="otpColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="qlw-Gf-rN8"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0U5-hZ-6kv">
-                                                <rect key="frame" x="281.66666666666669" y="0.0" width="46.333333333333314" height="1"/>
+                                                <rect key="frame" x="863.33333333333337" y="0.0" width="162.66666666666663" height="1"/>
                                                 <color key="backgroundColor" name="otpColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="c4C-Z8-JIy"/>
@@ -404,17 +412,17 @@
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:24" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KOF-to-ljd">
-                                        <rect key="frame" x="170" y="635" width="36" height="17"/>
+                                        <rect key="frame" x="170" y="615" width="36" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="oG0-Ge-IGs"/>
                                             <constraint firstAttribute="width" constant="36" id="okh-Jz-APf"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
-                                        <color key="textColor" name="editcolor"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Mb-sd-99p" customClass="UIControl">
-                                        <rect key="frame" x="16" y="674" width="344" height="63"/>
+                                        <rect key="frame" x="16" y="654" width="1042" height="63"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verify" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rXc-Ar-csY">
                                                 <rect key="frame" x="24.000000000000004" y="20" width="45.333333333333343" height="23"/>
@@ -423,7 +431,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yellowarrow" translatesAutoresizingMaskIntoConstraints="NO" id="NqE-77-Fc0">
-                                                <rect key="frame" x="283" y="2" width="59" height="59"/>
+                                                <rect key="frame" x="981" y="2" width="59" height="59"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="59" id="7iZ-ZA-Jle"/>
                                                     <constraint firstAttribute="width" constant="59" id="IqJ-Ij-UyY"/>
@@ -432,7 +440,6 @@
                                         </subviews>
                                         <color key="backgroundColor" name="appGreenColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="344" id="3H5-0k-cbE"/>
                                             <constraint firstAttribute="bottom" secondItem="rXc-Ar-csY" secondAttribute="bottom" constant="20" id="RmZ-Mk-MMP"/>
                                             <constraint firstItem="rXc-Ar-csY" firstAttribute="leading" secondItem="7Mb-sd-99p" secondAttribute="leading" constant="24" id="TIB-7m-LAI"/>
                                             <constraint firstAttribute="bottom" secondItem="NqE-77-Fc0" secondAttribute="bottom" constant="2" id="ekK-7g-ZgK"/>
@@ -446,7 +453,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="loginBtn:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="aZX-Jd-ha7"/>
+                                            <action selector="verifyBtnAction:" destination="Hoy-By-CQK" eventType="touchUpInside" id="TJg-pv-R7m"/>
                                         </connections>
                                     </view>
                                 </subviews>
@@ -461,7 +468,7 @@
                                     <constraint firstItem="Ybs-NP-piU" firstAttribute="leading" secondItem="2uw-IR-y1I" secondAttribute="leading" constant="24" id="D4e-u1-4O2"/>
                                     <constraint firstAttribute="trailing" secondItem="Ybs-NP-piU" secondAttribute="trailing" constant="24" id="EQz-wL-LyO"/>
                                     <constraint firstAttribute="trailing" secondItem="cBN-za-YoM" secondAttribute="trailing" constant="16" id="IJL-dc-eOz"/>
-                                    <constraint firstItem="KOF-to-ljd" firstAttribute="top" secondItem="nmp-Y1-V1u" secondAttribute="bottom" constant="36" id="MlD-Fe-8BZ"/>
+                                    <constraint firstItem="KOF-to-ljd" firstAttribute="top" secondItem="nmp-Y1-V1u" secondAttribute="bottom" constant="16" id="MlD-Fe-8BZ"/>
                                     <constraint firstItem="Dqz-dA-ci6" firstAttribute="top" secondItem="yFn-UC-wge" secondAttribute="bottom" constant="42" id="P8F-oU-Zwr"/>
                                     <constraint firstItem="nmp-Y1-V1u" firstAttribute="top" secondItem="Ybs-NP-piU" secondAttribute="bottom" constant="14" id="PZI-hh-L65"/>
                                     <constraint firstAttribute="trailing" secondItem="yFn-UC-wge" secondAttribute="trailing" constant="17" id="RcR-9W-uCr"/>
@@ -489,8 +496,16 @@
                             <constraint firstItem="2uw-IR-y1I" firstAttribute="leading" secondItem="quM-2c-y1D" secondAttribute="leading" id="qMk-rh-Z5f"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="jff-GI-mjK"/>
                     <connections>
-                        <outlet property="mobileNumber" destination="lX4-Wr-RdP" id="mAg-vq-oTU"/>
+                        <outlet property="mobileNo" destination="lX4-Wr-RdP" id="Iyz-9W-NTD"/>
+                        <outlet property="otp1" destination="Mx4-y7-DRJ" id="LcF-Ev-OjP"/>
+                        <outlet property="otp2" destination="yam-l0-kDK" id="nRF-19-Ql9"/>
+                        <outlet property="otp3" destination="TpB-VR-nki" id="5bV-cM-Fbs"/>
+                        <outlet property="otp4" destination="Rod-H0-iWV" id="riB-Xv-IX3"/>
+                        <outlet property="otp5" destination="79a-a5-u7X" id="HO5-Fv-hyd"/>
+                        <outlet property="otp6" destination="Tzi-yT-0V0" id="Qqk-4F-gGq"/>
+                        <outlet property="verifyButton" destination="7Mb-sd-99p" id="blt-o9-ZlY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DYu-nm-rpZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -508,7 +523,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="BPi-Nv-N2a"/>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="TDn-Qa-Kfo"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="khI-Qc-D3d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -538,9 +553,6 @@
         </namedColor>
         <namedColor name="otpColor">
             <color red="0.16078431372549021" green="0.17647058823529413" blue="0.19607843137254902" alpha="0.10000000149011612" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="phoneNoColorLabel">
-            <color red="0.16078431372549021" green="0.17647058823529413" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="splashScreenBgColor">
             <color red="0.96862745098039216" green="0.96470588235294119" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -227,7 +227,7 @@ class VerificationViewController: UIViewController, UITextFieldDelegate {
             // Try to parse the response
             do {
                 let decoder = JSONDecoder()
-                let responseObject = try decoder.decode(OTPRespons.self, from: data)
+                let responseObject = try decoder.decode(OtpVarificationModel.self, from: data)
                 DispatchQueue.main.async {
                     // Handle the response (e.g., show a success message or navigate to the next screen)
                     if let token = responseObject.result?.token {

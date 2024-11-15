@@ -17,72 +17,71 @@ class LoginViewModel {
     }
     
     func login(mobile: String) {
-        // Create JSON payload for the login request
         let parameters: [String: Any] = [
             "mobile": mobile,
-            "can_whatsapp_send": 0  // Adjust this if necessary
+            "can_whatsapp_send": 0
         ]
         
-        // Convert dictionary to JSON data
         do {
             let postData = try JSONSerialization.data(withJSONObject: parameters, options: [])
-            // Create URL request for the login API
             var request = URLRequest(url: URL(string: "https://uat-api.humpyfarms.com/api/customers/login")!, timeoutInterval: 30.0)
             request.httpMethod = "POST"
             request.setValue("iOS/1.5.7/18.0.1", forHTTPHeaderField: "User-Agent")
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.httpBody = postData
             
-            // Send the request
             let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
-                guard let self = self else { return } // Safely unwrap self
+                guard let self = self else { return }
                 
                 if let error = error {
                     print("Error: \(error.localizedDescription)")
+                    self.delegate?.didfinishLogin(with: .failure(error))
                     return
                 }
                 
-                // Check the HTTP status code
-                if let httpResponse = response as? HTTPURLResponse {
-                    let statusCode = httpResponse.statusCode
-                    print("HTTP Status Code: \(statusCode)")
-                    
-                    if statusCode != 200 {
-                        print("Failed to connect to the server. Please try again later.")
-
-                    }
+                guard let httpResponse = response as? HTTPURLResponse else {
+                    print("Error: Invalid response")
+                    self.delegate?.didfinishLogin(with: .failure(NSError(domain: "InvalidResponse", code: -1, userInfo: nil)))
+                    return
                 }
                 
-                // Check if data is nil or empty
+                print("HTTP Status Code: \(httpResponse.statusCode)")
+                if httpResponse.statusCode != 200 {
+                    let serverError = NSError(domain: "HTTPError", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: "Failed to connect to the server."])
+                    self.delegate?.didfinishLogin(with: .failure(serverError))
+                    return
+                }
+                
                 guard let data = data, !data.isEmpty else {
                     print("Error: Received empty or nil data")
-                    self.delegate?.didfinishLogin(with: .failure(error ?? "Error: Received empty or nil data"))
+                    let emptyDataError = NSError(domain: "EmptyData", code: -2, userInfo: [NSLocalizedDescriptionKey: "Received empty or nil data."])
+                    self.delegate?.didfinishLogin(with: .failure(emptyDataError))
                     return
                 }
                 
-                // Log the raw response data for debugging purposes
                 if let responseString = String(data: data, encoding: .utf8) {
                     print("Response data: \(responseString)")
                 }
                 
-                // Decode the response to check if OTP is sent
                 do {
                     let loginResponse = try JSONDecoder().decode(LoginModel.self, from: data)
-                    
-                    if loginResponse.status == 200 , let loginResult = loginResponse.result{
+                    if loginResponse.status == 200, let loginResult = loginResponse.result {
                         self.delegate?.didfinishLogin(with: .success(loginResponse))
-                        
                     } else {
-                        self.delegate?.didfinishLogin(with: .failure(error!))
+                        let decodingError = NSError(domain: "LoginError", code: loginResponse.status ?? 000, userInfo: [NSLocalizedDescriptionKey: loginResponse.message ?? "Unknown error."])
+                        self.delegate?.didfinishLogin(with: .failure(decodingError))
                     }
                 } catch {
+                    print("Decoding error: \(error.localizedDescription)")
                     self.delegate?.didfinishLogin(with: .failure(error))
                 }
             }
             task.resume()
         } catch {
             print("Error serializing JSON: \(error.localizedDescription)")
+            self.delegate?.didfinishLogin(with: .failure(error))
         }
     }
+
     
 }

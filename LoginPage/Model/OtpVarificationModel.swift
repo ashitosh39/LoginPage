@@ -9,7 +9,7 @@ import Foundation
 
 // Model for the Login API Response
 
-struct OTPRespons: Codable {
+struct OtpVarificationModel: Codable {
     let status: Int?
     let message: String?
     let result: OTPResponsResult?

@@ -175,7 +175,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 
                 // Decode the response to check if OTP is sent
                 do {
-                    let loginResponse = try JSONDecoder().decode(LoginResponse.self, from: data)
+                    let loginResponse = try JSONDecoder().decode(LoginModel.self, from: data)
                     
                     if loginResponse.status == 200 , let loginResult = loginResponse.result{
                         // OTP was sent successfully

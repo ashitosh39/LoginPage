@@ -10,7 +10,7 @@ import Foundation
 
 
 // MARK: - Welcome
-struct LoginResponse: Codable {
+struct LoginModel: Codable {
     
     let status: Int?
     let message: String?

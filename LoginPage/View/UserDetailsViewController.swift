@@ -15,6 +15,9 @@ class UserDetailsViewController: UIViewController {
     override func viewDidLoad() {
      
         getUserDetails()
+        
+       
+        
     }
     
     
@@ -73,6 +76,7 @@ class UserDetailsViewController: UIViewController {
                 
                 self.userData = decodedResponse // Store the decoded user data
                 print("Successfully parsed user details: \(String(describing: self.userData))")
+                UserDefaults.standard.set(self.userData?.result, forKey: "userData")
             } catch let decodeError {
                 print("Error decoding JSON: \(decodeError.localizedDescription)")
             }

@@ -511,6 +511,38 @@
             </objects>
             <point key="canvasLocation" x="1917" y="-71"/>
         </scene>
+        <!--User Details View Controller-->
+        <scene sceneID="UsK-dt-gOw">
+            <objects>
+                <viewController storyboardIdentifier="UserDetailsViewController" id="w34-eC-oPA" customClass="UserDetailsViewController" customModule="LoginPage" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5zX-gW-O7o">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iwz-Tw-cz9">
+                                <rect key="frame" x="46.666666666666657" y="326" width="300" height="200"/>
+                                <color key="backgroundColor" name="otpColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="5x6-xG-HqB"/>
+                                    <constraint firstAttribute="width" constant="300" id="DQH-hF-xdO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="hTb-kv-512"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="iwz-Tw-cz9" firstAttribute="centerX" secondItem="5zX-gW-O7o" secondAttribute="centerX" id="TxJ-De-kWk"/>
+                            <constraint firstItem="iwz-Tw-cz9" firstAttribute="centerY" secondItem="5zX-gW-O7o" secondAttribute="centerY" id="jkE-1H-HAu"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f5o-1I-vVZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2785" y="-71"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="HFc-ww-32H">
             <objects>

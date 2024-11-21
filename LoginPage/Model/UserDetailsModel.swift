@@ -30,8 +30,10 @@ struct UserDetailsModelResult: Codable {
 //    let sourceName, sourceOfReferral: JSONNull?
     let isEmailVerified: Int?
     let customerBalance: CustomerBalance?
-    let profileDetails: ProfileDetails?
+//    let profileDetails: ProfileDetails?
     let defaultAddress: DefaultAddress?
+    
+    
 //    let proMembership: JSONNull?
 
     enum CodingKeys: String, CodingKey {
@@ -87,7 +89,7 @@ struct UserDetailsModelResult: Codable {
         try container.encodeIfPresent(self.userID, forKey: .userID)
         try container.encodeIfPresent(self.isEmailVerified, forKey: .isEmailVerified)
         try container.encodeIfPresent(self.customerBalance, forKey: .customerBalance)
-        try container.encodeIfPresent(self.profileDetails, forKey: .profileDetails)
+//        try container.encodeIfPresent(self.profileDetails, forKey: .profileDetails)
         try container.encodeIfPresent(self.defaultAddress, forKey: .defaultAddress)
     }
     
@@ -114,7 +116,7 @@ struct UserDetailsModelResult: Codable {
         self.userID = try container.decodeIfPresent(Int.self, forKey: .userID)
         self.isEmailVerified = try container.decodeIfPresent(Int.self, forKey: .isEmailVerified)
         self.customerBalance = try container.decodeIfPresent(CustomerBalance.self, forKey: .customerBalance)
-        self.profileDetails = try container.decodeIfPresent(ProfileDetails.self, forKey: .profileDetails)
+//        self.profileDetails = try container.decodeIfPresent(ProfileDetails.self, forKey: .profileDetails)
         self.defaultAddress = try container.decodeIfPresent(DefaultAddress.self, forKey: .defaultAddress)
     }
 }
@@ -124,7 +126,13 @@ struct CustomerBalance: Codable {
     let walletBalance: Double?
     let cashbackBalance: Int?
     let cashbackMessage: String?
-
+    
+    init(walletBalance: Double, cashbackBalance: Int, cashbackMessage: String) {
+                self.walletBalance = walletBalance
+                self.cashbackBalance = cashbackBalance
+                self.cashbackMessage = cashbackMessage
+            }
+         
     enum CodingKeys: String, CodingKey {
         case walletBalance = "wallet_balance"
         case cashbackBalance = "cashback_balance"
@@ -286,32 +294,33 @@ struct DeliveryBoyDetails: Codable {
 }
 
 // MARK: - ProfileDetails
-struct ProfileDetails: Codable {
-}
+//struct ProfileDetails: Codable {
+//    
+//}
 
 // MARK: - Encode/decode helpers
 
-class JSONNull: Codable, Hashable {
-
-    public static func == (lhs: JSONNull, rhs: JSONNull) -> Bool {
-            return true
-    }
-
-    public var hashValue: Int {
-            return 0
-    }
-
-    public init() {}
-
-    public required init(from decoder: Decoder) throws {
-            let container = try decoder.singleValueContainer()
-            if !container.decodeNil() {
-                    throw DecodingError.typeMismatch(JSONNull.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for JSONNull"))
-            }
-    }
-
-    public func encode(to encoder: Encoder) throws {
-            var container = encoder.singleValueContainer()
-            try container.encodeNil()
-    }
-}
+//class JSONNull: Codable, Hashable {
+//
+//    public static func == (lhs: JSONNull, rhs: JSONNull) -> Bool {
+//            return true
+//    }
+//
+//    public var hashValue: Int {
+//            return 0
+//    }
+//
+//    public init() {}
+//
+//    public required init(from decoder: Decoder) throws {
+//            let container = try decoder.singleValueContainer()
+//            if !container.decodeNil() {
+//                    throw DecodingError.typeMismatch(JSONNull.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for JSONNull"))
+//            }
+//    }
+//
+//    public func encode(to encoder: Encoder) throws {
+//            var container = encoder.singleValueContainer()
+//            try container.encodeNil()
+//    }
+//}

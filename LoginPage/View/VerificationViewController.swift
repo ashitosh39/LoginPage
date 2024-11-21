@@ -164,36 +164,50 @@ class VerificationViewController: UIViewController, UITextFieldDelegate{
         }
     }
     func navigateToNormalViewController(withData  : OTPResponsResult) {
-        if let upv = self.storyboard?.instantiateViewController(withIdentifier: "UpdateProfileViewController") as? UpdateProfileViewController {
-
-            upv.userdata = self.userDetailsModelResult
-            self.navigationController?.pushViewController(upv, animated: true)
+        if self.userDetailsModelResult?.customerFirstName == "Humpy" && self.userDetailsModelResult?.customerLastName == "Customer"{
+            // redirect to updateProfileViewController
+            DispatchQueue.main.async{
+                if let upv = self.storyboard?.instantiateViewController(withIdentifier: "UpdateProfileViewController") as? UpdateProfileViewController {
+                    
+                    upv.userdata = self.userDetailsModelResult
+                    self.navigationController?.pushViewController(upv, animated: true)
+                }
+            }
+            
+        }else{
+            // redirect to Home Page
+            DispatchQueue.main.async{
+                self.navigationController?.pushViewController(HomeViewViewController(), animated: true)
+            }
+            
         }
         
-    }
         
-        @IBAction func verifyBtnAction(_ sender: Any){
-            // Collect OTP from the text fields
+        
+    }
+    
+    @IBAction func verifyBtnAction(_ sender: Any){
+        // Collect OTP from the text fields
+        
+        if let otpText1 = otp1.text, let otpText2 = otp2.text, let otpText3 = otp3.text, let otpText4 = otp4.text, let otpText5 = otp5.text, let otpText6 = otp6.text {
+            let otp = otpText1 + otpText2 + otpText3 + otpText4 + otpText5 + otpText6
             
-            if let otpText1 = otp1.text, let otpText2 = otp2.text, let otpText3 = otp3.text, let otpText4 = otp4.text, let otpText5 = otp5.text, let otpText6 = otp6.text {
-                let otp = otpText1 + otpText2 + otpText3 + otpText4 + otpText5 + otpText6
-                
-                // Attempt to convert the concatenated OTP string into an integer
-                if let otpInt = Int(otp) {
-                    // Pass the OTP and a valid requestId to the ViewModel
-                    if let requestId = requestId{ // Replace this with the actual requestId you need to pass
-                        verificationViewModel?.verifyOtp(otp: otpInt, requestId: requestId)
-                    }
-                } else {
-                    // Show an error if the OTP is invalid (not a number)
-                    let alert = UIAlertController(title: "Error", message: "Please enter a valid OTP.", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
-               
+            // Attempt to convert the concatenated OTP string into an integer
+            if let otpInt = Int(otp) {
+                // Pass the OTP and a valid requestId to the ViewModel
+                if let requestId = requestId{ // Replace this with the actual requestId you need to pass
+                    verificationViewModel?.verifyOtp(otp: otpInt, requestId: requestId)
                 }
+            } else {
+                // Show an error if the OTP is invalid (not a number)
+                let alert = UIAlertController(title: "Error", message: "Please enter a valid OTP.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                
             }
         }
     }
+}
 
 extension VerificationViewController: VerificationViewModelDelegate {
     func didFinishLoading(with result: Result<OtpVarificationModel, Error>) {
@@ -234,21 +248,31 @@ extension VerificationViewController : UserDetailsModelDelegate {
     func userDataFetch(with result: Result<UserDetailsModel, any Error>) {
         switch result {
         case .success(let data):
+            // Encode object
             if let userData = data.result {
                 self.userDetailsModelResult = userData
-                UserDefaults.standard.set(userData, forKey: "userData")
+                
+                do {
+                    let encoder = JSONEncoder()
+                    let encodedData = try encoder.encode(self.userDetailsModelResult)
+                    UserDefaults.standard.set(encodedData, forKey: "userDetails")
+                    DispatchQueue.main.async {
+                        let alertSecond = UIAlertController(title: "Success", message: "User data fetched successfully", preferredStyle: .alert)
+                        alertSecond.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        self.present(alertSecond, animated: true, completion: nil)
+                    }
+                    
+                } catch {
+                    print("Failed to encode user data: \(error)")
+                }
             }
-            DispatchQueue.main.async {
-                let alertSecond = UIAlertController(title: "Success", message: "User data fetched successfully", preferredStyle: .alert)
-                alertSecond.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                self.present(alertSecond, animated: true, completion: nil)
-            }
+            
             
         case .failure(let error):
             printContent("requast error: \(error)")
             
         }
     }
-       
-    }
+}
+
 

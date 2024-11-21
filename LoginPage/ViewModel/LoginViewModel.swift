@@ -74,9 +74,9 @@ class LoginViewModel {
                 } catch {
                     print("Decoding error: \(error.localizedDescription)")
                     self.delegate?.didfinishLogin(with: .failure(error))
-                }
-            }
+                }            }
             task.resume()
+
         } catch {
             print("Error serializing JSON: \(error.localizedDescription)")
             self.delegate?.didfinishLogin(with: .failure(error))

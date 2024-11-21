@@ -1,23 +1,18 @@
 //
-//  NormalPageViewController.swift
+//  HomeViewViewController.swift
 //  LoginPage
 //
-//  Created by Digitalflake on 18/11/24.
+//  Created by Digitalflake on 19/11/24.
 //
 
 import UIKit
 
-class NormalPageViewController: UIViewController {
+class HomeViewViewController: UIViewController {
 
-   
-    var tokenlabel: String?
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let token = tokenlabel{
-//            tokenLabel.text = token
-//            
-        }
-       
+
+        // Do any additional setup after loading the view.
     }
     
 

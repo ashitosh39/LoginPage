@@ -7,7 +7,9 @@
 
 import UIKit
 
-class VerificationViewController: UIViewController, UITextFieldDelegate {
+class VerificationViewController: UIViewController, UITextFieldDelegate{
+    
+    
     
     @IBOutlet weak var otp1: UITextField!
     @IBOutlet weak var otp2: UITextField!
@@ -23,12 +25,17 @@ class VerificationViewController: UIViewController, UITextFieldDelegate {
     var mobileNumberText: String?
     var originalViewYPosition: CGFloat?
     var requestId: String?
+    var userDetailViewModel : UserDetailsViewModel?
+    var userDetailsModelResult : UserDetailsModelResult?
+    var otpVerificationResult : OtpVarificationModel?
     override func viewDidLoad() {
         super.viewDidLoad()
+        userDetailViewModel = UserDetailsViewModel()
+        userDetailViewModel?.delegate = self
         verificationViewModel = VerificationViewModel()
         verificationViewModel?.delegate = self
-        
         // Set up the mobile number label
+        
         if let mobile = mobileNumberText {
             mobileNo.text = "Please enter 6 digit verification code sent to +91 \(mobile)"
         }
@@ -157,15 +164,17 @@ class VerificationViewController: UIViewController, UITextFieldDelegate {
         }
     }
     func navigateToNormalViewController(withData  : OTPResponsResult) {
-        if let nvc = self.storyboard?.instantiateViewController(withIdentifier: "UserDetailsViewController") as? UserDetailsViewController {
-//            nvc.tokenlabel = withData.token
-            
-            self.navigationController?.pushViewController(nvc, animated: true)
+        if let upv = self.storyboard?.instantiateViewController(withIdentifier: "UpdateProfileViewController") as? UpdateProfileViewController {
+
+            upv.userdata = self.userDetailsModelResult
+            self.navigationController?.pushViewController(upv, animated: true)
         }
+        
     }
         
         @IBAction func verifyBtnAction(_ sender: Any){
             // Collect OTP from the text fields
+            
             if let otpText1 = otp1.text, let otpText2 = otp2.text, let otpText3 = otp3.text, let otpText4 = otp4.text, let otpText5 = otp5.text, let otpText6 = otp6.text {
                 let otp = otpText1 + otpText2 + otpText3 + otpText4 + otpText5 + otpText6
                 
@@ -197,24 +206,20 @@ extension VerificationViewController: VerificationViewModelDelegate {
                     UserDefaults.standard.set(token, forKey: "token")
                     UserDefaults.standard.set(customerID, forKey: "customerID")
                     UserDefaults.standard.set(isRefferalScreen, forKey: "isRefferalScreen")
+                    userDetailViewModel?.getUserDetails()
                     DispatchQueue.main.async {
                         let alert = UIAlertController(title: "Successful", message: verificationResult.token, preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
                             self.navigateToNormalViewController(withData: verificationResult)}))
                         self.present(alert, animated: true, completion: nil)
-                       
                     }
                 }
-                
-                
-                
             } else {
                 // If token is nil, show error message
                 let alert = UIAlertController(title: "Error", message: "Token missing in the response.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }
-           
         case .failure(let error):
             DispatchQueue.main.async {
                 // Handle error (e.g., show error message)
@@ -225,3 +230,25 @@ extension VerificationViewController: VerificationViewModelDelegate {
         }
     }
 }
+extension VerificationViewController : UserDetailsModelDelegate {
+    func userDataFetch(with result: Result<UserDetailsModel, any Error>) {
+        switch result {
+        case .success(let data):
+            if let userData = data.result {
+                self.userDetailsModelResult = userData
+                UserDefaults.standard.set(userData, forKey: "userData")
+            }
+            DispatchQueue.main.async {
+                let alertSecond = UIAlertController(title: "Success", message: "User data fetched successfully", preferredStyle: .alert)
+                alertSecond.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alertSecond, animated: true, completion: nil)
+            }
+            
+        case .failure(let error):
+            printContent("requast error: \(error)")
+            
+        }
+    }
+       
+    }
+

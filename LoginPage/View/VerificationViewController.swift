@@ -43,6 +43,7 @@ class VerificationViewController: UIViewController, UITextFieldDelegate{
         for otpField in otpFields {
             otpField.delegate = self
             otpField.keyboardType = .numberPad
+            otpField.addTarget(self, action: #selector(otpFieldDidChange), for: .editingChanged)
             addDoneButtonOnKeyboard(to: otpField)
         }
         
@@ -64,8 +65,8 @@ class VerificationViewController: UIViewController, UITextFieldDelegate{
     func addDoneButtonOnKeyboard(to textField: UITextField) {
         let doneToolbar: UIToolbar = UIToolbar()
         doneToolbar.sizeToFit()
-        //        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneButtonAction))
-        //        doneToolbar.items = [doneButton]
+        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneButtonAction))
+        doneToolbar.items = [doneButton]
         textField.inputAccessoryView = doneToolbar
     }
     
@@ -121,48 +122,76 @@ class VerificationViewController: UIViewController, UITextFieldDelegate{
         return false
     }
     
-    // UITextFieldDelegate method to handle OTP input (numeric only and 1 digit per field)
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let currentText = textField.text ?? ""
-        let updatedText = (currentText as NSString).replacingCharacters(in: range, with: string)
-        
-        // Ensure that the entered string is a single digit and numeric
-        if let _ = string.rangeOfCharacter(from: CharacterSet.decimalDigits), string.count == 1 {
-            // Prevent entering more than one character
-            if updatedText.count > 1 {
-                return false
+//     UITextFieldDelegate method to handle OTP input (numeric only and 1 digit per field)
+        func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+            let currentText = textField.text ?? ""
+            let updatedText = (currentText as NSString).replacingCharacters(in: range, with: string)
+    
+            // Ensure that the entered string is a single digit and numeric
+            if let _ = string.rangeOfCharacter(from: CharacterSet.decimalDigits), string.count == 1 {
+                // Prevent entering more than one character
+                if updatedText.count > 1 {
+                    return false
+                }
+                return true
+            } else if string.isEmpty {
+                // Allow the user to delete a character
+                return true
+            } else {
+                return false // Prevent non-numeric input
             }
-            
-            // Automatically move to the next field after entering a digit
-            if textField == otp1 {
-                otp1.text = string
-                otp2.becomeFirstResponder()
-            } else if textField == otp2 {
-                otp2.text = string
-                otp3.becomeFirstResponder()
-            } else if textField == otp3 {
-                otp3.text = string
-                otp4.becomeFirstResponder()
-            } else if textField == otp4 {
-                otp4.text = string
-                otp5.becomeFirstResponder()
-            } else if textField == otp5 {
-                otp5.text = string
-                otp6.becomeFirstResponder()
-            } else if textField == otp6 {
-                otp6.text = string
-                otp6.resignFirstResponder() // Close keyboard when last field is filled
-                // Enable the "Verify" button when OTP is complete
-                verifyButton.isEnabled = true
-            }
-            return true
-        } else if string.isEmpty {
-            // Allow the user to delete a character
-            return true
-        } else {
-            return false // Prevent non-numeric input
         }
+     
+    // This function is called whenever a text field's text changes
+    @objc func otpFieldDidChange(_ textField: UITextField) {
+        // If the current field is empty and the user backspaced, move focus to the previous field
+        if textField.text?.isEmpty == true {
+            switch textField {
+            case otp2:
+                otp1.becomeFirstResponder()
+            case otp3:
+                otp2.becomeFirstResponder()
+            case otp4:
+                otp3.becomeFirstResponder()
+            case otp5:
+                otp4.becomeFirstResponder()
+            case otp6:
+                otp5.becomeFirstResponder()
+            default:
+                break
+            }
+        } else {
+            // Automatically move to the next field when text is entered
+            switch textField {
+            case otp1 where otp1.text?.count == 1:
+                otp2.becomeFirstResponder()
+            case otp2 where otp2.text?.count == 1:
+                otp3.becomeFirstResponder()
+            case otp3 where otp3.text?.count == 1:
+                otp4.becomeFirstResponder()
+            case otp4 where otp4.text?.count == 1:
+                otp5.becomeFirstResponder()
+            case otp5 where otp5.text?.count == 1:
+                otp6.becomeFirstResponder()
+            case otp6 where otp6.text?.count == 1:
+                otp6.resignFirstResponder()// Close keyboard when last field is filled
+            default:
+                break
+            }
+        }
+        // Check if all OTP fields are filled to enable the Verify button
+        checkOTPFields()
     }
+    
+    // Check if all OTP fields are filled, enable or disable the Verify button accordingly
+    func checkOTPFields() {
+        let otpFields = [otp1, otp2, otp3, otp4, otp5, otp6]
+        let allFieldsFilled = otpFields.allSatisfy { $0?.text?.count == 1 }
+        
+        // Enable or disable the verify button based on whether all OTP fields are filled
+        verifyButton.isEnabled = allFieldsFilled
+    }
+    
     func navigateToNormalViewController(withData  : OTPResponsResult) {
         if self.userDetailsModelResult?.customerFirstName == "Humpy" && self.userDetailsModelResult?.customerLastName == "Customer"{
             // redirect to updateProfileViewController
@@ -177,6 +206,7 @@ class VerificationViewController: UIViewController, UITextFieldDelegate{
         }else{
             // redirect to Home Page
             DispatchQueue.main.async{
+                let hvc = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewViewController") as? HomeViewViewController
                 self.navigationController?.pushViewController(HomeViewViewController(), animated: true)
             }
             

@@ -19,10 +19,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         enterMobileNO.delegate = self
-        
+        enterMobileNO.keyboardType = .numberPad
+        addDoneButtonOnKeyboard(to: enterMobileNO)
+        enterMobileNO.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         // Disable the login button initially
-        loginBtn.isEnabled = false
-        loginBtn.alpha = 0.5
+        checkOTPFields()
         
         self.loginViewModel = LoginViewModel()
         self.loginViewModel?.delegate = self
@@ -35,9 +36,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         // Remove observers when the view controller is deallocated
         NotificationCenter.default.removeObserver(self)
     }
-    // Automatically show the keyboard when the text field becomes active
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        // This is called when the text field is tapped, the keyboard should automatically open.
+
+    // Function to add the "Done" button to the keyboard
+    func addDoneButtonOnKeyboard(to textField: UITextField) {
+        let doneToolbar: UIToolbar = UIToolbar()
+        doneToolbar.sizeToFit()
+        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneButtonAction))
+        doneToolbar.items = [doneButton]
+        textField.inputAccessoryView = doneToolbar
+    }
+    
+    // Action when the "Done" button is pressed
+    @objc func doneButtonAction() {
+        view.endEditing(true)  // Dismiss the keyboard
     }
     
     // Handle keyboard will show notification
@@ -87,16 +98,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             return false // Block non-numeric characters
         }
         
-        // Enable/Disable login button based on the number of digits entered
-        if newLength == 10 {
-            loginBtn.isEnabled = true
-            loginBtn.alpha = 1 // Fully visible when enabled
-        } else {
-            loginBtn.isEnabled = false
-            loginBtn.alpha = 0.5  // Semi-transparent when disabled
-        }
+//        checkOTPFields()
         
         return true  // Allow text change
+    }
+    
+    @objc private func textFieldDidChange(_ textField: UITextField) {
+        checkOTPFields()
     }
     func navigateToVerificationViewController(withData: LoginResponseResult) {
         // Instantiate the VerificationViewController from storyboard
@@ -116,6 +124,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
         // Call API to send OTP
         self.loginViewModel?.login(mobile: mobileNumber)
+    }
+    
+    func checkOTPFields() {
+        let allFieldsFilled = enterMobileNO.text?.count == 10
+        if allFieldsFilled{
+            loginBtn.isEnabled = true
+            loginBtn.alpha = 1
+        }else{
+            loginBtn.isEnabled = false
+            loginBtn.alpha = 0.8
+        }
+        // Enable or disable the verify button based on whether all OTP fields are filled
+        
     }
     
 }

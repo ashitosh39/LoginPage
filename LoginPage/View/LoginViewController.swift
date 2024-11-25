@@ -10,13 +10,17 @@ import UIKit
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var enterMobileNO: UITextField!
-    
-    
     @IBOutlet weak var loginBtn: UIControl!
+    
+    
     var loginViewModel: LoginViewModel?
     var loginResult: LoginResponseResult?
     var originalViewYPosition: CGFloat?
+    
+ 
     override func viewDidLoad() {
+        
+        self.navigationItem.hidesBackButton = true
         super.viewDidLoad()
         enterMobileNO.delegate = self
         
@@ -31,6 +35,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+   
     deinit {
         // Remove observers when the view controller is deallocated
         NotificationCenter.default.removeObserver(self)
@@ -117,39 +122,37 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         // Call API to send OTP
         self.loginViewModel?.login(mobile: mobileNumber)
     }
-    
 }
 
 extension LoginViewController: LoginViewModelDelegate{
     func didfinishLogin(with result: Result<LoginModel, any Error>) {
-            switch result {
-            case .success(let data):
-                if let loginResult = data.result{
-                    // OTP was sent successfully
-                    self.loginResult = loginResult
-                    DispatchQueue.main.async {
-                        let alert = UIAlertController(title: "OTP Sent", message: "The OTP has been successfully sent to your mobile number.", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                            // Navigate to OTP verification screen after user taps OK
-                            self.navigateToVerificationViewController(withData: loginResult)
-                        }))
-                        self.present(alert, animated: true)
-                    }
-                }else{
-                    DispatchQueue.main.async {
-                        let alert = UIAlertController(title: "Error", message: "An error occurred while parsing the response from the server.", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                        self.present(alert, animated: true)
-                    }
-                }
-            case .failure(let error):
+        switch result {
+        case .success(let data):
+            if let loginResult = data.result{
+                // OTP was sent successfully
+                self.loginResult = loginResult
                 DispatchQueue.main.async {
-                    let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                    let alert = UIAlertController(title: "OTP Sent", message: "The OTP has been successfully sent to your mobile number.", preferredStyle: .alert)
+                  
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                        // Navigate to OTP verification screen after user taps OK
+                        self.navigateToVerificationViewController(withData: loginResult)
+                    }))
+                    self.present(alert, animated: true)
+                }
+            }else{
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "Error", message: "An error occurred while parsing the response from the server.", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                     self.present(alert, animated: true)
                 }
             }
-            
-            
+        case .failure(let error):
+            DispatchQueue.main.async {
+                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true)
+                }
+            }
         }
-}
+    }

@@ -13,6 +13,9 @@ class SplashScreenViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.hidesBackButton = true
+        
         self.userDetailViewModel = UserDetailsViewModel()
         self.userDetailViewModel?.delegate = self
         redirectUI()

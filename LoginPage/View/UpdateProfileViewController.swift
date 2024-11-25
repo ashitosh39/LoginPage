@@ -25,6 +25,8 @@ class UpdateProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        self.navigationItem.hidesBackButton = true
         // Set the view’s original Y position
         //            originalViewYPosition = self.view.frame.origin.y00
         

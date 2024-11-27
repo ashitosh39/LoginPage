@@ -327,22 +327,23 @@ class VerificationViewController: UIViewController, UITextFieldDelegate {
         verifyButton.isEnabled = allFieldsFilled
     }
     
-    func navigateToNormalViewController(withData  : OTPResponsResult) {
+    func navigateToNormalViewController() {
         if self.userDetailsModelResult?.customerFirstName == "Humpy" && self.userDetailsModelResult?.customerLastName == "Customer"{
             // redirect to updateProfileViewController
             DispatchQueue.main.async{
-                if let upv = self.storyboard?.instantiateViewController(withIdentifier: "UpdateProfileViewController") as? UpdateProfileViewController {
+                if let updateProfileView = self.storyboard?.instantiateViewController(withIdentifier: "UpdateProfileViewController") as? UpdateProfileViewController {
                     
-                    upv.userdata = self.userDetailsModelResult
-                    self.navigationController?.pushViewController(upv, animated: true)
+                    updateProfileView.userdata = self.userDetailsModelResult
+                    self.navigationController?.pushViewController(updateProfileView, animated: true)
                 }
+                
             }
             
         }else{
-            // redirect to Home Page
             DispatchQueue.main.async{
-                let hvc = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewViewController") as? HomeViewViewController
-                self.navigationController?.pushViewController(HomeViewViewController(), animated: true)
+                if let homeView = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewViewController") as? HomeViewViewController {
+                    self.navigationController?.pushViewController(homeView, animated: true)
+                }
             }
         }
     }
@@ -382,15 +383,7 @@ extension VerificationViewController: VerificationViewModelDelegate {
                     UserDefaults.standard.set(customerID, forKey: "customerID")
                     UserDefaults.standard.set(isRefferalScreen, forKey: "isRefferalScreen")
                     userDetailViewModel?.getUserDetails()
-                    startCountdown()
-                    updateCountdown()
 //                    countdownLabel.isHidden = false
-                    DispatchQueue.main.async {
-                        let alert = UIAlertController(title: "Successful", message: verificationResult.token, preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                            self.navigateToNormalViewController(withData: verificationResult)}))
-                        self.present(alert, animated: true, completion: nil)
-                    }
                 }
             } else {
                 // If token is nil, show error message
@@ -422,9 +415,10 @@ extension VerificationViewController: UserDetailsModelDelegate {
                     let encodedData = try encoder.encode(self.userDetailsModelResult)
                     UserDefaults.standard.set(encodedData, forKey: "userDetails")
                     DispatchQueue.main.async {
-                        let alertSecond = UIAlertController(title: "Success", message: "User data fetched successfully", preferredStyle: .alert)
-                        alertSecond.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                        self.present(alertSecond, animated: true, completion: nil)
+                        let alert = UIAlertController(title: "Successful", message: "WELCOME \(self.userDetailsModelResult?.customerFirstName ?? "") \(self.userDetailsModelResult?.customerLastName ?? "")", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                            self.navigateToNormalViewController()}))
+                        self.present(alert, animated: true, completion: nil)
                     }
                     
                 } catch {
@@ -450,7 +444,7 @@ extension VerificationViewController : LoginViewModelDelegate {
             if mobileNumberText != nil {
                 self.requestId = loginModel.result?.reqID
                 self.startCountdown() // Start the countdown timer for OTP
-//                self.countdownLabel.isHidden = false
+                self.countdownLabel.isHidden = false
             }
         case .failure(let error):
             printContent("requast error: \(error)")

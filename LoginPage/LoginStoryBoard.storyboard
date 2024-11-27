@@ -133,11 +133,11 @@
                                         </connections>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vP6-dF-NwM">
-                                        <rect key="frame" x="48" y="594" width="25" height="25"/>
-                                        <color key="backgroundColor" name="splashScreenBgColor"/>
+                                        <rect key="frame" x="48" y="605" width="22" height="22"/>
+                                        <color key="backgroundColor" name="editcolor"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="25" id="hVS-00-MsO"/>
-                                            <constraint firstAttribute="height" constant="25" id="toT-18-a1t"/>
+                                            <constraint firstAttribute="width" constant="22" id="hVS-00-MsO"/>
+                                            <constraint firstAttribute="height" constant="22" id="toT-18-a1t"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain"/>
@@ -153,7 +153,7 @@
                                 </subviews>
                                 <color key="backgroundColor" name="splashScreenBgColor"/>
                                 <constraints>
-                                    <constraint firstItem="vP6-dF-NwM" firstAttribute="top" secondItem="HrI-IG-Ho6" secondAttribute="bottom" constant="4" id="1YW-Td-UzU"/>
+                                    <constraint firstItem="vP6-dF-NwM" firstAttribute="top" secondItem="HrI-IG-Ho6" secondAttribute="bottom" constant="15" id="1YW-Td-UzU"/>
                                     <constraint firstItem="szm-tG-Deg" firstAttribute="leading" secondItem="DUJ-rq-cz3" secondAttribute="leading" id="5ig-bq-k17"/>
                                     <constraint firstItem="lgN-Kd-fbF" firstAttribute="top" secondItem="szm-tG-Deg" secondAttribute="bottom" constant="36" id="8T7-sy-f3O"/>
                                     <constraint firstItem="u8p-xT-akV" firstAttribute="leading" secondItem="fyQ-T6-a30" secondAttribute="trailing" constant="14" id="AmC-M0-Oh5"/>
@@ -793,13 +793,25 @@
                                                 <color key="textColor" name="connectionBtnTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qS6-98-BQV">
+                                                <rect key="frame" x="0.0" y="0.0" width="360" height="64"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain"/>
+                                                <connections>
+                                                    <action selector="proceedButton:" destination="w34-eC-oPA" eventType="touchUpInside" id="yaC-jG-iaM"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" name="appGreenColor"/>
                                         <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="qS6-98-BQV" secondAttribute="bottom" id="ANu-us-M4C"/>
+                                            <constraint firstAttribute="trailing" secondItem="qS6-98-BQV" secondAttribute="trailing" id="Bu6-cA-BbU"/>
                                             <constraint firstItem="X4U-br-bOa" firstAttribute="leading" secondItem="HRF-4e-QYO" secondAttribute="leading" constant="20" id="HKz-JO-rep"/>
                                             <constraint firstItem="JGh-NP-BkL" firstAttribute="top" secondItem="HRF-4e-QYO" secondAttribute="top" constant="2" id="IZ5-yO-020"/>
                                             <constraint firstAttribute="height" constant="64" id="JqQ-m4-dqy"/>
                                             <constraint firstAttribute="bottom" secondItem="X4U-br-bOa" secondAttribute="bottom" constant="25" id="QOJ-Y6-N3e"/>
+                                            <constraint firstItem="qS6-98-BQV" firstAttribute="leading" secondItem="HRF-4e-QYO" secondAttribute="leading" id="SLF-rf-JDN"/>
+                                            <constraint firstItem="qS6-98-BQV" firstAttribute="top" secondItem="HRF-4e-QYO" secondAttribute="top" id="Syi-Em-kAY"/>
                                             <constraint firstItem="X4U-br-bOa" firstAttribute="top" secondItem="HRF-4e-QYO" secondAttribute="top" constant="25" id="fYG-KX-nvN"/>
                                             <constraint firstAttribute="trailing" secondItem="JGh-NP-BkL" secondAttribute="trailing" constant="2" id="gib-ud-PFg"/>
                                             <constraint firstAttribute="bottom" secondItem="JGh-NP-BkL" secondAttribute="bottom" constant="2" id="tKB-ti-t4y"/>
@@ -840,6 +852,7 @@
                         <outlet property="email" destination="HWd-CB-Vxg" id="iSH-La-hKP"/>
                         <outlet property="firstName" destination="E2R-fp-H4V" id="7lx-V3-VrW"/>
                         <outlet property="lastName" destination="fLs-im-dhk" id="ilJ-ps-Q5P"/>
+                        <outlet property="proceedButton" destination="qS6-98-BQV" id="loK-SN-g4G"/>
                         <outlet property="refralCode" destination="7iV-7h-dc5" id="GEn-HB-gIE"/>
                         <outlet property="refrelCodeView" destination="JxP-FI-aps" id="gXo-Gh-w7c"/>
                     </connections>
@@ -856,17 +869,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="440" height="956"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1RG-1Y-OdC">
-                                <rect key="frame" x="111" y="367" width="210" height="71"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" name="editcolor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rPr-01-LKW">
+                                <rect key="frame" x="0.0" y="62" width="440" height="860"/>
+                                <color key="backgroundColor" name="appGreenColor"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="lxQ-M5-arI"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="splashScreenBgColor"/>
+                        <constraints>
+                            <constraint firstItem="rPr-01-LKW" firstAttribute="top" secondItem="lxQ-M5-arI" secondAttribute="top" id="DBk-iJ-efp"/>
+                            <constraint firstItem="lxQ-M5-arI" firstAttribute="bottom" secondItem="rPr-01-LKW" secondAttribute="bottom" id="Ofr-AU-XPy"/>
+                            <constraint firstItem="lxQ-M5-arI" firstAttribute="trailing" secondItem="rPr-01-LKW" secondAttribute="trailing" id="jSD-al-L98"/>
+                            <constraint firstItem="rPr-01-LKW" firstAttribute="leading" secondItem="lxQ-M5-arI" secondAttribute="leading" id="pai-2Q-b7h"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JEG-un-L6r" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

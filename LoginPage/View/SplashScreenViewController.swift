@@ -63,7 +63,9 @@ class SplashScreenViewController: UIViewController {
         }else{
             // redirect to Home Page
             DispatchQueue.main.async{
-                self.navigationController?.pushViewController(HomeViewViewController(), animated: true)
+                if let homeView = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewViewController") as? HomeViewViewController {
+                    self.navigationController?.pushViewController(homeView, animated: true)
+                }
             }
 
         }

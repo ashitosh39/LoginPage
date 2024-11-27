@@ -7,17 +7,17 @@
 
 import Foundation
 
+
 protocol VerificationViewModelDelegate: AnyObject {
     func didFinishLoading(with result: Result<OtpVarificationModel, Error>)
 }
 
 class VerificationViewModel {
-
     weak var delegate: VerificationViewModelDelegate?
     init(delegate: VerificationViewModelDelegate? = nil) {
         self.delegate = delegate
     }
-    
+
     func verifyOtp(otp: Int, requestId: String) {
         // Ensure that OTP and requestId are not empty or invalid
         guard otp > 0, !requestId.isEmpty else {
@@ -50,6 +50,7 @@ class VerificationViewModel {
                 self.delegate?.didFinishLoading(with: .failure(error))
                 return
             }
+            
             
             guard let httpResponse = response as? HTTPURLResponse else {
                 let error = NSError(domain: "InvalidResponse", code: -1, userInfo: nil)

@@ -12,13 +12,13 @@
 					<key>EndingColumnNumber</key>
 					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>350</string>
+					<string>361</string>
 					<key>StartingColumnNumber</key>
 					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>349</string>
+					<string>360</string>
 					<key>Timestamp</key>
-					<string>754226888.573163</string>
+					<string>754378219.832179</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -46,8 +46,6 @@
                 let alert = UIAlertController(title: "Error", message: "Please enter a valid OTP.", preferredStyle: .alert)
 </string>
 			</dict>
-			<key>title</key>
-			<string>login</string>
 			<key>type</key>
 			<string>bookmark</string>
 		</dict>

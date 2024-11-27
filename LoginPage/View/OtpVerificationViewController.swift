@@ -7,8 +7,10 @@
 
 import UIKit
 
-class VerificationViewController: UIViewController, UITextFieldDelegate{
+class VerificationViewController: UIViewController, UITextFieldDelegate {
+   
     
+   
     
     
     @IBOutlet weak var otp1: UITextField!
@@ -19,23 +21,35 @@ class VerificationViewController: UIViewController, UITextFieldDelegate{
     @IBOutlet weak var otp6: UITextField!
     @IBOutlet weak var mobileNo: UILabel!
     @IBOutlet weak var verifyButton: UIControl!
-    
-    
+    @IBOutlet weak var countdownLabel: UILabel!
+//    @IBOutlet weak var resendButton: UIButton!
+    @IBOutlet weak var resendLabel: UILabel!
+   
+    private var countdownTimer: Timer?
+    private var countdownValue = 30
+    var isWhatsAppSelected: Bool = false
+       
+    var loginViewModel: LoginViewModel?
+    var loginResult: LoginResponseResult?
     var verificationViewModel: VerificationViewModel?
     var mobileNumberText: String?
     var originalViewYPosition: CGFloat?
     var requestId: String?
+  
     var userDetailViewModel : UserDetailsViewModel?
     var userDetailsModelResult : UserDetailsModelResult?
     var otpVerificationResult : OtpVarificationModel?
     override func viewDidLoad() {
         super.viewDidLoad()
+//        initiate delegate
+        loginViewModel = LoginViewModel()
+        loginViewModel?.delegate = self
         userDetailViewModel = UserDetailsViewModel()
         userDetailViewModel?.delegate = self
         verificationViewModel = VerificationViewModel()
         verificationViewModel?.delegate = self
-        // Set up the mobile number label
         
+        // Set up the mobile number label
         if let mobile = mobileNumberText {
             mobileNo.text = "Please enter 6 digit verification code sent to +91 \(mobile)"
         }
@@ -53,9 +67,114 @@ class VerificationViewController: UIViewController, UITextFieldDelegate{
         // Observers for keyboard appearance
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
+
+        updateResendLabelUI()
         
     }
+    
+    func updateResendLabelUI() {
+        // Set up the attributed text for the label
+        let fullText = "Didn't receive the code? RESEND"
+        let attributedString = NSMutableAttributedString(string: fullText)
+        
+        // Set default style (black color for the first part)
+        attributedString.addAttribute(.foregroundColor, value: UIColor.black, range: NSRange(location: 0, length: 26))
+        
+        // Set red color to "RESEND"
+        let resendRange = (fullText as NSString).range(of: "RESEND")
+        attributedString.addAttribute(.foregroundColor, value: UIColor.red, range: resendRange)
+        
+        // Set the attributed text to the label
+        resendLabel.attributedText = attributedString
+        
+        // Make the label interactive
+        resendLabel.isUserInteractionEnabled = true
+        
+        // Add tap gesture recognizer
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapResend(_:)))
+        resendLabel.addGestureRecognizer(tapGesture)
+    
+
+    }
+    @objc func handleTapResend(_ gesture: UITapGestureRecognizer) {
+        // Get the location of the tap in the label
+        let location = gesture.location(in: gesture.view)
+        
+        // Check if the tap is within the "RESEND" part of the label
+        if let label = gesture.view as? UILabel {
+            let text = label.attributedText?.string ?? ""
+            let range = (text as NSString).range(of: "RESEND")
+            
+            let layoutManager = NSLayoutManager()
+            let textContainer = NSTextContainer(size: label.bounds.size)
+            let textStorage = NSTextStorage(attributedString: label.attributedText!)
+            
+            layoutManager.addTextContainer(textContainer)
+            textStorage.addLayoutManager(layoutManager)
+            
+            let glyphIndex = layoutManager.glyphIndex(for: location, in: textContainer)
+            
+            if NSLocationInRange(glyphIndex, range) {
+                // "RESEND" tapped, perform your action
+                print("Resend label tapped")
+                
+                // Ensure mobileNumberText is a String and can be used in the API request
+                if let mobile = mobileNumberText, !mobile.isEmpty {
+                    // Here, isWhatsAppSelected is assumed to be a Bool, so passing 0 for SMS and 1 for WhatsApp
+                    let canSendWhatsApp = isWhatsAppSelected ? 1 : 0
+                    
+                    // Ensure to call login with correct parameters
+                    self.loginViewModel?.login(mobile: mobile, canSendWhatsApp: canSendWhatsApp)
+                    
+                    // Start the countdown timer for resend
+                    startCountdown()
+                    countdownLabel.isHidden = false
+                } else {
+                    print("Mobile number is missing or invalid")
+                }
+            }
+        }
+    }
+
+
+    
+    override func viewWillAppear(_ animated: Bool) {
+        startCountdown()
+        updateCountdown()
+    }
+   
+    func startCountdown() {
+        countdownValue = 30 // Reset countdown value
+                
+                // Update the countdown label initially
+          resendLabel.isEnabled = true
+           resendLabel.alpha = 0.5 // Dim the resend label when it is disabled
+    
+                // Create the timer that updates every second
+        countdownTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateCountdown), userInfo: nil, repeats: true)
+    }
+    @objc func updateCountdown() {
+            countdownValue -= 1
+            // Update the countdown label every second
+            countdownLabel.text = "00:\(countdownValue)"
+        resendLabel.isUserInteractionEnabled = false
+
+        resendLabel.alpha = 0.5 // Dim the resend label when it is disabled
+            // When the countdown reaches 0
+       
+        if countdownValue == 0 {
+                countdownTimer?.invalidate() // Stop the timer
+                countdownTimer = nil
+            countdownLabel.isHidden = true
+            resendLabel.isUserInteractionEnabled = true
+
+            resendLabel.alpha = 1.0
+//                resendButton.isEnabled = true // Enable the button again
+//                countdownLabel.isHidden = true // Hide the countdown label
+            }
+        }
+    
+
     deinit {
         // Remove observers when the view controller is deallocated
         NotificationCenter.default.removeObserver(self)
@@ -70,7 +189,7 @@ class VerificationViewController: UIViewController, UITextFieldDelegate{
         textField.inputAccessoryView = doneToolbar
     }
     
-    // Action when the "Done" button is pressed
+      // Action when the "Done" button is pressed
     @objc func doneButtonAction() {
         view.endEditing(true)  // Dismiss the keyboard
     }
@@ -160,7 +279,8 @@ class VerificationViewController: UIViewController, UITextFieldDelegate{
             default:
                 break
             }
-        } else {
+        } else if textField.text?.count == 1{
+            moveToNextEmptyField(from: textField)
             // Automatically move to the next field when text is entered
             switch textField {
             case otp1 where otp1.text?.count == 1:
@@ -179,10 +299,25 @@ class VerificationViewController: UIViewController, UITextFieldDelegate{
                 break
             }
         }
+        
         // Check if all OTP fields are filled to enable the Verify button
         checkOTPFields()
+        // After a user enters a digit, move focus to the first empty text field
+       
     }
-    
+    func moveToNextEmptyField(from currentField: UITextField) {
+        let otpFields = [otp1, otp2, otp3, otp4, otp5, otp6]
+        
+        // Find the index of the current field
+        if let currentIndex = otpFields.firstIndex(where: { $0 == currentField }) {
+            // Loop through the remaining fields to find the next empty one
+            for index in (currentIndex + 1)..<otpFields.count {
+                if otpFields[index]?.text?.isEmpty == true {
+                    otpFields[index]?.becomeFirstResponder()
+                }
+            }
+        }
+    }
     // Check if all OTP fields are filled, enable or disable the Verify button accordingly
     func checkOTPFields() {
         let otpFields = [otp1, otp2, otp3, otp4, otp5, otp6]
@@ -209,11 +344,7 @@ class VerificationViewController: UIViewController, UITextFieldDelegate{
                 let hvc = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewViewController") as? HomeViewViewController
                 self.navigationController?.pushViewController(HomeViewViewController(), animated: true)
             }
-            
         }
-        
-        
-        
     }
     
     @IBAction func verifyBtnAction(_ sender: Any){
@@ -251,6 +382,9 @@ extension VerificationViewController: VerificationViewModelDelegate {
                     UserDefaults.standard.set(customerID, forKey: "customerID")
                     UserDefaults.standard.set(isRefferalScreen, forKey: "isRefferalScreen")
                     userDetailViewModel?.getUserDetails()
+                    startCountdown()
+                    updateCountdown()
+//                    countdownLabel.isHidden = false
                     DispatchQueue.main.async {
                         let alert = UIAlertController(title: "Successful", message: verificationResult.token, preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
@@ -274,7 +408,8 @@ extension VerificationViewController: VerificationViewModelDelegate {
         }
     }
 }
-extension VerificationViewController : UserDetailsModelDelegate {
+
+extension VerificationViewController: UserDetailsModelDelegate {
     func userDataFetch(with result: Result<UserDetailsModel, any Error>) {
         switch result {
         case .success(let data):
@@ -305,4 +440,20 @@ extension VerificationViewController : UserDetailsModelDelegate {
     }
 }
 
-
+extension VerificationViewController : LoginViewModelDelegate {
+    func didfinishLogin(with result: Result<LoginModel, any Error>) {
+        switch result {
+        case .success(let loginModel):
+            // Handle successfull login
+            print("Login successful: \(loginModel)")
+            // Proceed with OTP verification
+            if mobileNumberText != nil {
+                self.requestId = loginModel.result?.reqID
+                self.startCountdown() // Start the countdown timer for OTP
+//                self.countdownLabel.isHidden = false
+            }
+        case .failure(let error):
+            printContent("requast error: \(error)")
+        }
+    }
+}

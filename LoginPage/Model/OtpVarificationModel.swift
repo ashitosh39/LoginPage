@@ -13,20 +13,18 @@ struct OtpVarificationModel: Codable {
     let status: Int?
     let message: String?
     let result: OTPResponsResult?
-    
+
+    enum CodingKeys: CodingKey {
+        case status
+        case message
+        case result
+    }
     func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.status, forKey: .status)
         try container.encodeIfPresent(self.message, forKey: .message)
         try container.encodeIfPresent(self.result, forKey: .result)
     }
-    
-    enum CodingKeys: CodingKey {
-        case status
-        case message
-        case result
-    }
-    
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.status = try container.decodeIfPresent(Int.self, forKey: .status)

@@ -70,13 +70,13 @@ class SplashScreenViewController: UIViewController {
     }
 
 }
-//
 extension SplashScreenViewController: UserDetailsModelDelegate {
     func userDataFetch(with result: Result<UserDetailsModel, any Error>) {
         switch result {
         case .success(let data):
+            // Encode object
             if let userData = data.result {
-                
+         
                 do {
                     let encoder = JSONEncoder()
                     let encodedData = try encoder.encode(self.userDetailsModelResult)
@@ -100,9 +100,7 @@ extension SplashScreenViewController: UserDetailsModelDelegate {
         }
     }
 }
-//
-//    
-    
+       
     //    var userDetailViewModel: UserDetailsViewModel?
     //    var userDetailsModelResult : UserDetailsModelResult?
     //
@@ -153,5 +151,3 @@ extension SplashScreenViewController: UserDetailsModelDelegate {
     //        }
     //    }
     //}
-  
-    

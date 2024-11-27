@@ -10,16 +10,18 @@ import Foundation
 protocol LoginViewModelDelegate: AnyObject {
     func didfinishLogin(with : Result <LoginModel, Error>)
 }
+
 class LoginViewModel {
     weak var delegate : LoginViewModelDelegate?
+    
     init(delegate: LoginViewModelDelegate? = nil) {
         self.delegate = delegate
     }
     
-    func login(mobile: String) {
+    func login(mobile: String, canSendWhatsApp: Int) {
         let parameters: [String: Any] = [
             "mobile": mobile,
-            "can_whatsapp_send": 0
+            "can_whatsapp_send": 1 // This is crucial
         ]
         
         do {
@@ -74,14 +76,13 @@ class LoginViewModel {
                 } catch {
                     print("Decoding error: \(error.localizedDescription)")
                     self.delegate?.didfinishLogin(with: .failure(error))
-                }            }
+                }
+            }
             task.resume()
-
+            
         } catch {
             print("Error serializing JSON: \(error.localizedDescription)")
             self.delegate?.didfinishLogin(with: .failure(error))
         }
     }
-
-    
 }

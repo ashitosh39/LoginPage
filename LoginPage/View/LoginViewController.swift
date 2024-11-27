@@ -16,7 +16,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     var loginViewModel: LoginViewModel?
     var loginResult: LoginResponseResult?
     var originalViewYPosition: CGFloat?
-    
+    @IBOutlet weak var checkmarkButton: UIButton!  // Round button outlet
+    var isCheckmarkSelected: Bool = false         // To keep track of the checkmark state
  
     override func viewDidLoad() {
         
@@ -114,33 +115,58 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             
         }
     }
+    @IBAction func checkmarkButtonTapped(_ sender: UIButton) {
+        // Toggle the checkmark selected state
+           isCheckmarkSelected.toggle()
+           
+           // Update the button's image based on the selected state
+           if isCheckmarkSelected {
+               // Display filled checkmark (selected state)
+               checkmarkButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+           } else {
+               // Display empty checkmark (unselected state)
+               checkmarkButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+           }
+           
+           // Optional debug print to track the state
+           print("Checkmark selected: \(isCheckmarkSelected ? "Yes" : "No")")
+    }
+
     
     @IBAction func loginBtn(_ sender: Any) {
         guard let mobileNumber = enterMobileNO.text, mobileNumber.count == 10 else {
             return // No action if the number is not 10 digits
         }
+        
+        // Determine whether to send OTP via WhatsApp or SMS
+        let canSendWhatsApp = isCheckmarkSelected ? 1 : 0
+        
+        // Debugging log to verify the WhatsApp selection state
+        print("Sending OTP via: \(canSendWhatsApp == 1 ? "WhatsApp" : "SMS")")
+        
         // Call API to send OTP
-        self.loginViewModel?.login(mobile: mobileNumber)
+        self.loginViewModel?.login(mobile: mobileNumber, canSendWhatsApp: canSendWhatsApp)
     }
-}
+    }
 
-extension LoginViewController: LoginViewModelDelegate{
+extension LoginViewController: LoginViewModelDelegate {
     func didfinishLogin(with result: Result<LoginModel, any Error>) {
         switch result {
         case .success(let data):
-            if let loginResult = data.result{
+            if let loginResult = data.result {
                 // OTP was sent successfully
                 self.loginResult = loginResult
                 DispatchQueue.main.async {
-                    let alert = UIAlertController(title: "OTP Sent", message: "The OTP has been successfully sent to your mobile number.", preferredStyle: .alert)
-                  
+                    let otpSentMessage = self.isCheckmarkSelected ? "The OTP has been successfully sent to your mobile number via WhatsApp." : "The OTP has been successfully sent to your mobile number via SMS."
+                    
+                    let alert = UIAlertController(title: "OTP Sent", message: otpSentMessage, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
                         // Navigate to OTP verification screen after user taps OK
                         self.navigateToVerificationViewController(withData: loginResult)
                     }))
                     self.present(alert, animated: true)
                 }
-            }else{
+            } else {
                 DispatchQueue.main.async {
                     let alert = UIAlertController(title: "Error", message: "An error occurred while parsing the response from the server.", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -152,7 +178,7 @@ extension LoginViewController: LoginViewModelDelegate{
                 let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 self.present(alert, animated: true)
-                }
             }
         }
     }
+}

@@ -8,6 +8,7 @@
 import Foundation
 
 
+
 protocol VerificationViewModelDelegate: AnyObject {
     func didFinishLoading(with result: Result<OtpVarificationModel, Error>)
 }

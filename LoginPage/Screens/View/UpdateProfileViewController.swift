@@ -8,6 +8,7 @@
 import UIKit
 
 class UpdateProfileViewController: UIViewController, UITextFieldDelegate {
+    
 
 
 @IBOutlet weak var firstName: UITextField!
@@ -22,24 +23,31 @@ class UpdateProfileViewController: UIViewController, UITextFieldDelegate {
 
 @IBOutlet weak var proceedButton: UIButton!
     
-    var updateProfileViewModel : UpdateProfileViewModel!
+@IBOutlet weak var referralCodeVerify: UIView!
+    
+    
+    var updateProfileViewModel : UpdateProfileViewModel?
     var refferalResult: ReferralResult?
-var userdata: UserDetailsModelResult?
+    var userdata: UserDetailsModelResult?
 var originalViewYPosition: CGFloat = 0
 override func viewDidLoad() {
     super.viewDidLoad()
     
-    
+    updateProfileViewModel = UpdateProfileViewModel()
+    self.updateProfileViewModel?.delegate = self
     self.navigationItem.hidesBackButton = true
     
     let isRefferalScreen = UserDefaults.standard.bool(forKey: "isRefferalScreen")
+    referralCodeVerify.isHidden = true
     // Use if-else statement to show/hide refrelCodeView
-    if isRefferalScreen{
+    /*if isRefferalScreen{
         refrelCodeView.isHidden = false  // Hide the referral code view when isRefferalScreen is true
         
     }else{
         refrelCodeView.isHidden = true // Show the referral code view when isRefferalScreen is false
-    }
+    }*/
+    
+    
     // Populate user details if available
     if let userDetails = userdata {
         firstName.text = userDetails.customerFirstName ?? ""
@@ -103,30 +111,55 @@ func addDoneButtonOnKeyboard(to textField: UITextField) {
         self.view.frame.origin.y = self.originalViewYPosition
     }
 }
-
+    
+    @IBAction func referalCodeVerify(_ sender: Any) {
+        
+        
+        
+    }
+    
 @IBAction func proceedButton(_ sender: Any) {
-//    let 
-//    self.navigationController?.pushViewController(HomeViewViewController(), animated: true)
-//    
+    DispatchQueue.main.async{
+        if let selectCity = self.storyboard?.instantiateViewController(withIdentifier: "SelectCityViewController") as? SelectCityViewController {
+            self.navigationController?.pushViewController(selectCity, animated: true)
+        }
+    }
 }
 
 }
-extension UpdateProfileViewModel : UpdateProfileViewModelDelegate{
+extension UpdateProfileViewController : UpdateProfileViewModelDelegate{
     func verifyReferralCode(with result: Result<ReferralCode, any Error>) {
         switch result {
         case .success(let referralCode):
             showAlert(message: "Referral code verified successfully.")
+            DispatchQueue.main.async {
+      
+                self.referralCodeVerify.isHidden = true
+            }
         case .failure(let error):
             // Handle error (e.g., network or parsing error)
             showAlert(message: "Failed to verify referral code: \(error.localizedDescription)")
+            DispatchQueue.main.async {
+                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true)
+            }
+            DispatchQueue.main.async {
+             
+                self.referralCodeVerify.isHidden = false
+            }
+        }
+    }
+    
+    // Show an alert with a message
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "Referral Code Verification", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
         }
     }
 }
-       // Show an alert with a message
-       func showAlert(message: String) {
-           let alert = UIAlertController(title: "Referral Code Verification", message: message, preferredStyle: .alert)
-           alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//           present(alert, animated: true, completion: nil)
-       }
 
+    
 

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E492BF7F2CE628D000B0EF29 /* netfox in Frameworks */ = {isa = PBXBuildFile; productRef = E492BF7E2CE628D000B0EF29 /* netfox */; };
+		E4E227062D1582160019C300 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E4E227052D1582160019C300 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4E227062D1582160019C300 /* Kingfisher in Frameworks */,
 				E492BF7F2CE628D000B0EF29 /* netfox in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -84,6 +86,7 @@
 			name = LoginPage;
 			packageProductDependencies = (
 				E492BF7E2CE628D000B0EF29 /* netfox */,
+				E4E227052D1582160019C300 /* Kingfisher */,
 			);
 			productName = LoginPage;
 			productReference = E48CB03B2CE32BE400F228E4 /* LoginPage.app */;
@@ -115,6 +118,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				E492BF7D2CE628D000B0EF29 /* XCRemoteSwiftPackageReference "netfox" */,
+				E4E227042D1582160019C300 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E48CB03C2CE32BE400F228E4 /* Products */;
@@ -364,6 +368,14 @@
 				minimumVersion = 1.21.0;
 			};
 		};
+		E4E227042D1582160019C300 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.1.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -371,6 +383,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E492BF7D2CE628D000B0EF29 /* XCRemoteSwiftPackageReference "netfox" */;
 			productName = netfox;
+		};
+		E4E227052D1582160019C300 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4E227042D1582160019C300 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

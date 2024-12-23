@@ -14,33 +14,31 @@ protocol UpdateProfileViewModelDelegate: AnyObject {
 class UpdateProfileViewModel {
     
     weak var delegate: UpdateProfileViewModelDelegate?
-  
+    
     init(delegate: UpdateProfileViewModelDelegate? = nil) {
         self.delegate = delegate
     }
     
     func verifyReferralCode(withReferralCode: String) {
-      
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
-        let userAgent: String = "iOS"+"/"+appVersion+"/" + UIDevice.current.systemVersion
-     
-
-        // Ensure the referral code is properly added to the URL
-        guard let referralurl = URL(string: "https://uat-api.humpyfarms.com/api/configFeatures/validate/referralCode?referral_code=") else {
+        let userAgent: String = "iOS" + "/" + appVersion + "/" + UIDevice.current.systemVersion
+        
+        guard let referralurl = URL(string: "https://uat-api.humpyfarms.com/api/configFeatures/validate/referralCode") else {
             print("Invalid URL")
             return
         }
         var components = URLComponents(url: referralurl, resolvingAgainstBaseURL: false)
         components?.queryItems = [
-            URLQueryItem(name: "referralCode", value: "\(withReferralCode)")
+            URLQueryItem(name: "referral_code", value: "\(withReferralCode)")
         ]
         
         guard let finalUrl = components?.url else {
             print("Failed to construct the URL with query parameters")
             return
         }
-        var request = URLRequest(url: referralurl, timeoutInterval: 30.0)
-        request.addValue("iOS/1.0/18.1", forHTTPHeaderField: "User-Agent")
+        
+        var request = URLRequest(url: finalUrl, timeoutInterval: 30.0)
+        request.addValue(userAgent, forHTTPHeaderField: "User-Agent")
         request.addValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lcl9pZCI6MzU5MTUsImlhdCI6MTczMTkzMzg0MywiZXhwIjoxNzMyMzY1ODQzfQ.04ok2lMB_n4CO0rnpMxism94RrVgmvaOx-4ZvaVOxLk", forHTTPHeaderField: "Authorization")
         request.httpMethod = "GET"
         
@@ -61,7 +59,14 @@ class UpdateProfileViewModel {
             do {
                 // Parse the data into the ReferralCode model
                 let referralCodeResponse = try JSONDecoder().decode(ReferralCode.self, from: data)
-                self?.delegate?.verifyReferralCode(with: .success(referralCodeResponse))
+                
+                // Check the status code to determine if the referral code was valid
+                if let status = referralCodeResponse.status, status == 1 {
+                    self?.delegate?.verifyReferralCode(with: .success(referralCodeResponse))
+                } else {
+                    let error = NSError(domain: "UpdateProfile", code: -1, userInfo: [NSLocalizedDescriptionKey: referralCodeResponse.message ?? "Unknown error"])
+                    self?.delegate?.verifyReferralCode(with: .failure(error))
+                }
             } catch {
                 // Handle JSON parsing error
                 self?.delegate?.verifyReferralCode(with: .failure(error))

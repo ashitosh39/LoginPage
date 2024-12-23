@@ -8,10 +8,6 @@
 import UIKit
 
 class VerificationViewController: UIViewController, UITextFieldDelegate {
-   
-    
-   
-    
     
     @IBOutlet weak var otp1: UITextField!
     @IBOutlet weak var otp2: UITextField!
@@ -341,8 +337,8 @@ class VerificationViewController: UIViewController, UITextFieldDelegate {
             
         }else{
             DispatchQueue.main.async{
-                if let homeView = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewViewController") as? HomeViewViewController {
-                    self.navigationController?.pushViewController(homeView, animated: true)
+                if let selectCity = self.storyboard?.instantiateViewController(withIdentifier: "SelectCityViewController") as? SelectCityViewController {
+                    self.navigationController?.pushViewController(selectCity, animated: true)
                 }
             }
         }

@@ -53,8 +53,8 @@ class SelectCityViewController: UIViewController, UITextFieldDelegate {
             }
 
             // Get the selected city's ID (or index) - you need to update this based on your data model
-            let              = results[selectedCityIndex.row]
-            guard let cityId = selectedCity.cityId else {
+            let selectedCity = results[selectedCityIndex.row]
+        guard let cityId = selectedCity.cityID else {
                 showAlert(message: "City ID is missing.")
                 return
             }
@@ -113,13 +113,13 @@ class SelectCityViewController: UIViewController, UITextFieldDelegate {
             task.resume()
         print("Proceed button tapped")
         }
-    func showAlert(message: String) {
-        DispatchQueue.main.async {
-            let alert = UIAlertController(title: "City Fetching", message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
+//    func showAlert(message: String) {
+//        DispatchQueue.main.async {
+//            let alert = UIAlertController(title: "City Fetching", message: message, preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//            self.present(alert, animated: true, completion: nil)
+//        }
+//    }
     }
     
     

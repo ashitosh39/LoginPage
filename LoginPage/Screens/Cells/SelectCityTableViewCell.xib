@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -34,13 +33,6 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BIB-ra-xVJ">
-                        <rect key="frame" x="80" y="5" width="24" height="24"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="24" id="dkm-v2-fe9"/>
-                            <constraint firstAttribute="width" constant="24" id="ib5-Eh-Jor"/>
-                        </constraints>
-                    </imageView>
                 </subviews>
                 <color key="backgroundColor" name="splashScreenBgColor"/>
                 <constraints>
@@ -48,9 +40,7 @@
                     <constraint firstItem="Pjx-o3-hQ3" firstAttribute="top" secondItem="GdQ-PR-NGb" secondAttribute="bottom" constant="3" id="QKd-pj-gnD"/>
                     <constraint firstItem="Pjx-o3-hQ3" firstAttribute="top" secondItem="GdQ-PR-NGb" secondAttribute="bottom" constant="3" id="bYD-HG-LQH"/>
                     <constraint firstItem="Pjx-o3-hQ3" firstAttribute="leading" secondItem="GdQ-PR-NGb" secondAttribute="leading" id="fIG-ZA-pwp"/>
-                    <constraint firstItem="BIB-ra-xVJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="fZ7-Rg-94p"/>
                     <constraint firstItem="GdQ-PR-NGb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="l1t-Mn-ypr"/>
-                    <constraint firstItem="BIB-ra-xVJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="80" id="nty-hZ-ryg"/>
                     <constraint firstAttribute="bottom" secondItem="Pjx-o3-hQ3" secondAttribute="bottom" constant="13" id="vGf-1l-NxZ"/>
                 </constraints>
             </tableViewCellContentView>
@@ -58,9 +48,8 @@
             <connections>
                 <outlet property="cityImage" destination="GdQ-PR-NGb" id="wUv-sB-KvM"/>
                 <outlet property="cityNameLabel" destination="Pjx-o3-hQ3" id="UvC-lj-oQl"/>
-                <outlet property="tickMarkImageView" destination="BIB-ra-xVJ" id="iGm-nW-uYE"/>
             </connections>
-            <point key="canvasLocation" x="-504.58015267175568" y="4.5774647887323949"/>
+            <point key="canvasLocation" x="-555" y="-29"/>
         </tableViewCell>
     </objects>
     <resources>

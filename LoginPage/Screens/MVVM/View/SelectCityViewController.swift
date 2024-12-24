@@ -17,6 +17,9 @@ class SelectCityViewController: UIViewController, UITextFieldDelegate {
     var results = [Results]()  // Store the array of Results (Cities)
   
     var selectedCityIndex: IndexPath? // Store the selected row's index path
+    var wareHouseDataViewModel: WareHouseDataViewModel?
+    var house : House?
+    
             
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,8 +29,8 @@ class SelectCityViewController: UIViewController, UITextFieldDelegate {
             // Start fetching cities
         selectCityViewModel?.cityData()
             
-            selectCityTableView.delegate = self
-            selectCityTableView.dataSource = self
+        selectCityTableView.delegate = self
+        selectCityTableView.dataSource = self
         registerXIBWithTableView()
     }
     func registerXIBWithTableView() {
@@ -47,85 +50,25 @@ class SelectCityViewController: UIViewController, UITextFieldDelegate {
 
     @IBAction func ProceedButton(_ sender: Any) {
         guard let selectedCityIndex = selectedCityIndex else {
-                // If no city is selected, show an alert
-                showAlert(message: "Please select a city to proceed.")
-                return
-            }
-
-            // Get the selected city's ID (or index) - you need to update this based on your data model
-            let selectedCity = results[selectedCityIndex.row]
-        guard let cityId = selectedCity.cityID else {
-                showAlert(message: "City ID is missing.")
-                return
-            }
-
-            // Create the API URL with the city ID
-            let urlString = "https://uat-api.humpyfarms.com/api/warehouse/getWarehouseByCity?city_id=\(cityId)"
-            
-            // Convert the URL string into a valid URL object
-            guard let url = URL(string: urlString) else {
-                showAlert(message: "Invalid URL.")
-                return
-            }
-
-            // Create the URL request
-            var request = URLRequest(url: url, timeoutInterval: Double.infinity)
-            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            request.addValue("iOS/1.5.7/18.0.1", forHTTPHeaderField: "User-Agent")
-            request.addValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lcl9pZCI6MzU5MTUsImlhdCI6MTczNDk1ODA3MywiZXhwIjoxNzM1MzkwMDczfQ.JVsOcRjMRDuhAZmhSGsMRpEkHGHbZUUVPkgnb_OsxPk", forHTTPHeaderField: "Authorization")
-
-            // HTTP Method
-            request.httpMethod = "GET"  // Since you're using GET, no need to add httpBody here.
-
-            // Perform the API call
-            let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                // Handle network errors
-                if let error = error {
-                    print("Error: \(error.localizedDescription)")
-                    DispatchQueue.main.async {
-                        self.showAlert(message: "Network error: \(error.localizedDescription)")
-                    }
+                    showAlert(message: "Please select a city to proceed.")
                     return
                 }
-
-                // Check if we got a response and valid data
-                guard let data = data else {
-                    DispatchQueue.main.async {
-                        self.showAlert(message: "No data received.")
-                    }
-                    return
-                }
-
-                // Attempt to parse the JSON response (Assuming the response is in JSON format)
-                do {
-                    let responseJSON = try JSONSerialization.jsonObject(with: data, options: [])
-                    print("Response: \(responseJSON)") // Log the response for debugging
-                    // You can now handle the response here, such as updating the UI
-                } catch {
-                    DispatchQueue.main.async {
-                        self.showAlert(message: "Failed to parse response.")
-                    }
-                    print("Error parsing JSON: \(error.localizedDescription)")
-                }
-            }
-
-            // Start the network request
-            task.resume()
-        print("Proceed button tapped")
-        }
-//    func showAlert(message: String) {
-//        DispatchQueue.main.async {
-//            let alert = UIAlertController(title: "City Fetching", message: message, preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//            self.present(alert, animated: true, completion: nil)
-//        }
-//    }
+        let selectedCity = results[selectedCityIndex.row]
+                
+                // Fetch the warehouse data for the selected city
+        fetchWareHouseData(forCity: selectedCity)
+           
     }
-    
-    
 
-
-
+           
+        }
+    func showAlert(message: String) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "City Select", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+           
+        }
+    }
 
 extension SelectCityViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -206,4 +149,4 @@ extension SelectCityViewController: SelectCityViewModelDelegate {
 }
 
 
-//if you click on any row of the  tableview, thet row should be selected and a tick mark logo should appear on the right side of the image in that row
+

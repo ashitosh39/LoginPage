@@ -37,9 +37,10 @@ class UpdateProfileViewModel {
             return
         }
         
+        let token = UserDefaults.standard.string(forKey: "token")
         var request = URLRequest(url: finalUrl, timeoutInterval: 30.0)
         request.addValue(userAgent, forHTTPHeaderField: "User-Agent")
-        request.addValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lcl9pZCI6MzU5MTUsImlhdCI6MTczMTkzMzg0MywiZXhwIjoxNzMyMzY1ODQzfQ.04ok2lMB_n4CO0rnpMxism94RrVgmvaOx-4ZvaVOxLk", forHTTPHeaderField: "Authorization")
+        request.setValue(token, forHTTPHeaderField: "Authorization")
         request.httpMethod = "GET"
         
         let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in

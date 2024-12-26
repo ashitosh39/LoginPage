@@ -31,12 +31,12 @@ func fetchWareHouseData(forCity selectedCity: Results) {
         print("Invalid URL")
         return
     }
-    
+    let token = UserDefaults.standard.string(forKey: "token")
     // Create the URLRequest
     var request = URLRequest(url: url, timeoutInterval: Double.infinity)
     request.addValue("application/json", forHTTPHeaderField: "Content-Type")
     request.addValue("iOS/1.5.7/18.0.1", forHTTPHeaderField: "User-Agent")
-    request.addValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lcl9pZCI6MzU5MTUsImlhdCI6MTczNDk1ODA3MywiZXhwIjoxNzM1MzkwMDczfQ.JVsOcRjMRDuhAZmhSGsMRpEkHGHbZUUVPkgnb_OsxPk", forHTTPHeaderField: "Authorization")
+    request.setValue(token, forHTTPHeaderField: "Authorization")
 
     // HTTP Method
     request.httpMethod = "GET"

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SelectCityCollectionViewCell" id="gTV-IL-0wX" customClass="SelectCityCollectionViewCell" customModule="LoginPage" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="214" height="240"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="214" height="240"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dFj-hE-pGM">
+                        <rect key="frame" x="0.0" y="0.0" width="112" height="158"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZBK-rm-VzW">
+                                <rect key="frame" x="0.0" y="0.0" width="109" height="136"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="109" id="gwR-Zv-1AM"/>
+                                    <constraint firstAttribute="height" constant="136" id="zAd-BZ-DKk"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WUO-fD-Qw7">
+                                <rect key="frame" x="0.0" y="139" width="112" height="19"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="19" id="SGB-zT-UuR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="teckMarkImage" translatesAutoresizingMaskIntoConstraints="NO" id="Lhx-Oo-0CW">
+                                <rect key="frame" x="87" y="0.0" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="KuD-8m-iJS"/>
+                                    <constraint firstAttribute="height" constant="25" id="Qqx-im-3gx"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ZBK-rm-VzW" secondAttribute="trailing" constant="3" id="0Io-vt-xen"/>
+                            <constraint firstItem="ZBK-rm-VzW" firstAttribute="top" secondItem="dFj-hE-pGM" secondAttribute="top" id="6bS-Qu-Hux"/>
+                            <constraint firstAttribute="trailing" secondItem="WUO-fD-Qw7" secondAttribute="trailing" id="CBt-4H-iND"/>
+                            <constraint firstAttribute="bottom" secondItem="WUO-fD-Qw7" secondAttribute="bottom" id="CFV-QY-Jjs"/>
+                            <constraint firstItem="WUO-fD-Qw7" firstAttribute="top" secondItem="ZBK-rm-VzW" secondAttribute="bottom" constant="3" id="OOf-q1-8mJ"/>
+                            <constraint firstItem="WUO-fD-Qw7" firstAttribute="leading" secondItem="dFj-hE-pGM" secondAttribute="leading" id="Pdj-D9-q5J"/>
+                            <constraint firstItem="Lhx-Oo-0CW" firstAttribute="top" secondItem="dFj-hE-pGM" secondAttribute="top" id="Pep-hg-g5x"/>
+                            <constraint firstItem="ZBK-rm-VzW" firstAttribute="leading" secondItem="dFj-hE-pGM" secondAttribute="leading" id="PfN-i1-PQj"/>
+                            <constraint firstAttribute="bottom" secondItem="WUO-fD-Qw7" secondAttribute="bottom" id="euO-X6-eNI"/>
+                            <constraint firstAttribute="trailing" secondItem="Lhx-Oo-0CW" secondAttribute="trailing" id="t81-VL-tML"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="dFj-hE-pGM" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Kmj-vq-fOG"/>
+                <constraint firstItem="dFj-hE-pGM" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="LaR-Jm-Eiq"/>
+            </constraints>
+            <size key="customSize" width="214" height="240"/>
+            <connections>
+                <outlet property="cityImage" destination="ZBK-rm-VzW" id="amP-91-XDw"/>
+                <outlet property="cityNameLabel" destination="WUO-fD-Qw7" id="M4m-kR-h67"/>
+                <outlet property="tickImage" destination="Lhx-Oo-0CW" id="lUk-vJ-Xyx"/>
+            </connections>
+            <point key="canvasLocation" x="-74.809160305343511" y="52.816901408450704"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="teckMarkImage" width="34" height="35"/>
+    </resources>
+</document>

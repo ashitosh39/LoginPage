@@ -9,12 +9,14 @@ import UIKit
 import Kingfisher
 class SelectCityViewController: UIViewController, UITextFieldDelegate {
     
-    @IBOutlet weak var selectCityTableView: UITableView!
+
+    @IBOutlet weak var selectCityCollectionView: UICollectionView!
     
+   
     @IBOutlet weak var proceedButton: UIButton!
     
-    var selectCityViewModel: SelecteCityViewModel?
-    var results = [Results]()  // Store the array of Results (Cities)
+    var selectCityViewModel: SelectCityViewModel?
+    var results : [Results] = []  // Store the array of Results (Cities)
   
     var selectedCityIndex: IndexPath? // Store the selected row's index path
     var wareHouseDataViewModel: WareHouseDataViewModel?
@@ -24,29 +26,30 @@ class SelectCityViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        selectCityViewModel = SelecteCityViewModel(delegate: self)
+        selectCityViewModel = SelectCityViewModel(delegate: self)
         selectedCityIndex = nil
             // Start fetching cities
         selectCityViewModel?.cityData()
             
-        selectCityTableView.delegate = self
-        selectCityTableView.dataSource = self
+        selectCityCollectionView.delegate = self
+        selectCityCollectionView.dataSource = self
+        
         registerXIBWithTableView()
     }
     func registerXIBWithTableView() {
-        let nib = UINib(nibName: "SelectCityTableViewCell", bundle: nil)
-        self.selectCityTableView.register(nib, forCellReuseIdentifier: "SelectCityTableViewCell")
+        let nib = UINib(nibName: "SelectCityCollectionViewCell", bundle: nil)
+        self.selectCityCollectionView.register(nib, forCellWithReuseIdentifier: "SelectCityCollectionViewCell")
     }
-    func didReceiveCityData(_ cities: [Results]) {
-            self.results = cities  // Update the city model data
-            self.selectCityTableView.reloadData()  // Reload the table view with new data
-        }
-        
-        // Delegate method to handle failure
-        func didFailWithError(_ error: String) {
-            // Handle the error (e.g., show an alert)
-            print("Error: \(error)")
-        }
+//    func didReceiveCityData(_ cities: [Results]) {
+//            self.results = cities  // Update the city model data
+//            self.selectCityTableView.reloadData()  // Reload the table view with new data
+//        }
+//        
+//        // Delegate method to handle failure
+//        func didFailWithError(_ error: String) {
+//            // Handle the error (e.g., show an alert)
+//            print("Error: \(error)")
+//        }
 
     @IBAction func ProceedButton(_ sender: Any) {
         guard let selectedCityIndex = selectedCityIndex else {
@@ -57,6 +60,12 @@ class SelectCityViewController: UIViewController, UITextFieldDelegate {
                 
                 // Fetch the warehouse data for the selected city
         fetchWareHouseData(forCity: selectedCity)
+        
+        DispatchQueue.main.async {
+            if let dashboardVC = self.storyboard?.instantiateViewController(withIdentifier: "DashBoardScreenViewController") as? DashBoardScreenViewController {
+                self.navigationController?.pushViewController(dashboardVC, animated: true)
+            }
+        }
            
     }
 
@@ -70,54 +79,59 @@ class SelectCityViewController: UIViewController, UITextFieldDelegate {
         }
     }
 
-extension SelectCityViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    // Return the number of rows in the table view (i.e., the number of cities)
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return results.count  // Return the number of cities
+extension SelectCityViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return results.count
     }
     
-    // Configure each table view cell
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SelectCityTableViewCell", for: indexPath) as! SelectCityTableViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SelectCityCollectionViewCell", for: indexPath) as! SelectCityCollectionViewCell
         
         let city = results[indexPath.row]
         
-        // Bind city name to the label
         cell.cityNameLabel.text = city.cityName
         
-        // Safely unwrap the optional cityImageURL
-        if let imageUrlString = city.cityImageURL, let imageUrl = URL(string: imageUrlString) {
+        
+        if let imageurlString = city.cityImageURL, let imageUrl = URL(string: imageurlString) {
             cell.cityImage.kf.setImage(with: imageUrl)
-        } else {
-            cell.cityImage.image = UIImage(named: "defaultImage") // Use a default image if needed
+        }else {
+            cell.cityImage.image = UIImage(named: "defaultImage")
         }
         
-        // Set the selection state for the tick mark drawing
         cell.isSelectedCell = indexPath == selectedCityIndex
-
         
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Check if the tapped row is already selected
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if selectedCityIndex == indexPath {
-            // If tapped on the same row, deselect it
             selectedCityIndex = nil
-        } else {
-            // Otherwise, select the new row
+        }else{
             selectedCityIndex = indexPath
         }
-
-        // Reload the table to update the selection state
-        tableView.reloadData()
+        collectionView.reloadData()
     }
 
-    
-    // Optionally, set row height for a consistent layout
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100.00
+//    func collectionView(_ collectionView: UICollectionView,heightForItemAt indexPath: IndexPath) -> CGFloat {
+//        return 180.00
+//    }
+
+   
+//        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//                let width = (selectCityCollectionView.frame.width)/2
+//                let height = 100.0
+//                return CGSize(width: width, height: height)
+//            
+//            }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout:
+                UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+                if collectionView == selectCityCollectionView {
+                    return CGSize(width: 112, height: 158) // Collection View size right?
+                }
+                else {
+                    return CGSize(width: 0, height: 0)
+                }
+
     }
 }
 extension SelectCityViewController: SelectCityViewModelDelegate {
@@ -131,7 +145,7 @@ extension SelectCityViewController: SelectCityViewModelDelegate {
             } else {
                 self.results = cities  // Update the city model data
                 DispatchQueue.main.async {
-                    self.selectCityTableView.reloadData()  // Reload the table view with the new data
+                    self.selectCityCollectionView.reloadData()  // Reload the table view with the new data
                 }
             }
         case .failure(let error):
@@ -148,5 +162,29 @@ extension SelectCityViewController: SelectCityViewModelDelegate {
     }
 }
 
+extension SelectCityViewController: WarehouseDataViewModelDelegate {
+    func wareHouseDataFetched(with houseResult: Result<[House], any Error>) {
+        switch houseResult {
+            case .success(let houses):
+            if let wareHouseData = houses.first {
+                if let warehousesID = wareHouseData.warehouseID {
+                    UserDefaults.standard.set(warehousesID, forKey: "warehouseID")
+                    print("warehouseID Id save successfully : \(warehousesID)")
+                }
+                let alert = UIAlertController(title: "No Warehouses Found", message: "Please try again later", preferredStyle: .alert)
+                               alert.addAction(UIAlertAction(title: "OK", style: .default))
+                               present(alert, animated: true)
+                           }
+            
+            if houses.isEmpty {
 
+                let alert = UIAlertController(title: "No Warehouses Found", message: "Please try again later", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                present(alert, animated: true)
+            }
+        case .failure(let error):
+            showAlert(message: "failed to fetch warehouses: \(error.localizedDescription)")
+        }
+    }
+}
 

@@ -10,7 +10,7 @@ import Foundation
 
 
 protocol VerificationViewModelDelegate: AnyObject {
-    func didFinishLoading(with result: Result<OtpVarificationModel, Error>)
+    func otpVerificationLoading(with result: Result<OtpVarificationModel, Error>)
 }
 
 class VerificationViewModel {
@@ -26,17 +26,17 @@ class VerificationViewModel {
             return
         }
         
-        let parameters = [
+        let parameters : [String : Any] = [
             "otp": otp,
             "request_id": requestId
-        ] as [String : Any]
+        ] 
         
         guard let postData = try? JSONSerialization.data(withJSONObject: parameters, options: []) else {
             print("Failed to serialize JSON data")
             return
         }
         
-        var request = URLRequest(url: URL(string: "https://uat-api.humpyfarms.com/api/customers/verifyMobileOtp")!, timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: "https://qa-api.humpyfarms.com/api/customers/verifyMobileOtp")!, timeoutInterval: Double.infinity)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("\(postData.count)", forHTTPHeaderField: "Content-Length")
         request.addValue("iOS/1.5.7/18.0.1", forHTTPHeaderField: "User-Agent")
@@ -48,26 +48,26 @@ class VerificationViewModel {
             
             if let error = error {
                 print("Error: \(error.localizedDescription)")
-                self.delegate?.didFinishLoading(with: .failure(error))
+                self.delegate?.otpVerificationLoading(with: .failure(error))
                 return
             }
             
             
             guard let httpResponse = response as? HTTPURLResponse else {
                 let error = NSError(domain: "InvalidResponse", code: -1, userInfo: nil)
-                self.delegate?.didFinishLoading(with: .failure(error))
+                self.delegate?.otpVerificationLoading(with: .failure(error))
                 return
             }
             
             if httpResponse.statusCode != 200 {
                 let serverError = NSError(domain: "HTTPError", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: "Failed to connect to the server."])
-                self.delegate?.didFinishLoading(with: .failure(serverError))
+                self.delegate?.otpVerificationLoading(with: .failure(serverError))
                 return
             }
             
             guard let data = data, !data.isEmpty else {
                 let emptyDataError = NSError(domain: "EmptyData", code: -2, userInfo: [NSLocalizedDescriptionKey: "Received empty or nil data."])
-                self.delegate?.didFinishLoading(with: .failure(emptyDataError))
+                self.delegate?.otpVerificationLoading(with: .failure(emptyDataError))
                 return
             }
             
@@ -83,20 +83,20 @@ class VerificationViewModel {
                     // If the response is successful and token is present
                     if let token = verifyResult.token {
                         print("OTP Verification successful: \(token)")
-                        self.delegate?.didFinishLoading(with: .success(verifyResponse))
+                        self.delegate?.otpVerificationLoading(with: .success(verifyResponse))
                     } else {
                         // Handle the case where the token is missing
                         let missingTokenError = NSError(domain: "MissingToken", code: -3, userInfo: [NSLocalizedDescriptionKey: "Token is missing in the response."])
-                        self.delegate?.didFinishLoading(with: .failure(missingTokenError))
+                        self.delegate?.otpVerificationLoading(with: .failure(missingTokenError))
                     }
                 } else {
                     // If status is not 200 or other failure condition
                     let decodingError = NSError(domain: "VerificationFailed", code: verifyResponse.status ?? 000, userInfo: [NSLocalizedDescriptionKey: verifyResponse.message ?? "Unknown error."])
-                    self.delegate?.didFinishLoading(with: .failure(decodingError))
+                    self.delegate?.otpVerificationLoading(with: .failure(decodingError))
                 }
             } catch {
                 print("Failed to decode response: \(error)")
-                self.delegate?.didFinishLoading(with: .failure(error))
+                self.delegate?.otpVerificationLoading(with: .failure(error))
             }
         }
         

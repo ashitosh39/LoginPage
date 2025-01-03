@@ -22,12 +22,14 @@ class UserDetailsViewModel {
     }
     func getUserDetails() {
         // Ensure the base URL is valid
-        let customerId = UserDefaults.standard.integer(forKey: "customerID")
-        let token = UserDefaults.standard.string(forKey: "token")
+        guard let customerId = UserDefaults.standard.value(forKey: "customerID") as? Int else{
+            return
+        }
+        let token = UserDefaults.standard.value(forKey: "token")
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
         let userAgent: String = "iOS" + "/" + appVersion + "/" + UIDevice.current.systemVersion
         
-        guard let url = URL(string: "https://uat-api.humpyfarms.com/api/customers/getCustomerDetails") else {
+        guard let url = URL(string: "https://qa-api.humpyfarms.com/api/customers/getCustomerDetails") else {
             print("Invalid URL")
             return
         }
@@ -45,7 +47,7 @@ class UserDetailsViewModel {
         
         // Prepare the request
         var request = URLRequest(url: finalUrl)
-        request.setValue(token, forHTTPHeaderField: "Authorization")
+        request.setValue(token as? String, forHTTPHeaderField: "Authorization")
         request.setValue(userAgent, forHTTPHeaderField: "User-Agent")
         request.httpMethod = "GET" // GET request doesn't need a body
         
@@ -80,7 +82,7 @@ class UserDetailsViewModel {
                 let userData = try decoder.decode(UserDetailsModel.self, from: data)
                 
                 // Check if the response status is 200 and process the data
-                if userData.status == 200, let user = userData.result {
+                if userData.status == 200, let user = userData.userDetailsModelResult {
                     self.delegate?.userDataFetch(with: .success(userData))
                 } else {
                     let serverError = NSError(domain: "ServerError", code: userData.status ?? 0, userInfo: [NSLocalizedDescriptionKey: userData.message ?? "Unknown error"])

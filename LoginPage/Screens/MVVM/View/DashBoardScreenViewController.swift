@@ -11,7 +11,7 @@ class DashBoardScreenViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print("DashBoardScreenViewController")
        
     }
     

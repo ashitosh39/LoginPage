@@ -13,6 +13,7 @@
 
 /* Begin PBXFileReference section */
 		E48CB03B2CE32BE400F228E4 /* LoginPage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoginPage.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4C720002D1D932800846F91 /* LoginPage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LoginPage.xcodeproj; path = LoginPage/Screens/MVVM/View/LoginPage.xcodeproj; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -61,6 +62,13 @@
 			isa = PBXGroup;
 			children = (
 				E48CB03B2CE32BE400F228E4 /* LoginPage.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E4C720032D1D932800846F91 /* Products */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -123,6 +131,12 @@
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E48CB03C2CE32BE400F228E4 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = E4C720032D1D932800846F91 /* Products */;
+					ProjectRef = E4C720002D1D932800846F91 /* LoginPage.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				E48CB03A2CE32BE400F228E4 /* LoginPage */,

@@ -323,26 +323,51 @@ class VerificationViewController: UIViewController, UITextFieldDelegate {
         verifyButton.isEnabled = allFieldsFilled
     }
     
+//    func navigateToNormalViewController() {
+//        if self.userDetailsModelResult?.customerFirstName?.lowercased() == "humpy" && self.userDetailsModelResult?.customerLastName?.lowercased() == "customer"{
+////            if userDetailsModelResult?.customerFirstName == "Humpy" && userDetailsModelResult?.customerLastName == "Customer"{
+//          
+//            // redirect to updateProfileViewController
+//                DispatchQueue.main.async{
+//                    if let updateProfileView = self.storyboard?.instantiateViewController(withIdentifier: "UpdateProfileViewController") as? UpdateProfileViewController {
+//                        
+//                        updateProfileView.userdata = self.userDetailsModelResult
+//                        self.navigationController?.pushViewController(updateProfileView, animated: true)
+//                    }
+////                }
+//            }
+//            
+//        }
+//        else{
+//            DispatchQueue.main.async{
+//                if let selectCity = self.storyboard?.instantiateViewController(withIdentifier: "SelectCityViewController") as? SelectCityViewController {
+//                    self.navigationController?.pushViewController(selectCity, animated: true)
+//                }
+//            }
+//        }
+//    }
     func navigateToNormalViewController() {
-        if self.userDetailsModelResult?.customerFirstName == "Humpy" && self.userDetailsModelResult?.customerLastName == "Customer"{
-            // redirect to updateProfileViewController
-            DispatchQueue.main.async{
+        guard let userDetails = self.userDetailsModelResult else {
+            print("User details are missing")
+            return
+        }
+        
+        if userDetails.customerFirstName?.lowercased() == "humpy" && userDetails.customerLastName?.lowercased() == "customer" {
+            DispatchQueue.main.async {
                 if let updateProfileView = self.storyboard?.instantiateViewController(withIdentifier: "UpdateProfileViewController") as? UpdateProfileViewController {
-                    
-                    updateProfileView.userdata = self.userDetailsModelResult
+                    updateProfileView.userdata = userDetails
                     self.navigationController?.pushViewController(updateProfileView, animated: true)
                 }
-                
             }
-            
-        }else{
-            DispatchQueue.main.async{
+        } else {
+            DispatchQueue.main.async {
                 if let selectCity = self.storyboard?.instantiateViewController(withIdentifier: "SelectCityViewController") as? SelectCityViewController {
                     self.navigationController?.pushViewController(selectCity, animated: true)
                 }
             }
         }
     }
+
     
     @IBAction func verifyBtnAction(_ sender: Any){
         // Collect OTP from the text fields
@@ -364,11 +389,12 @@ class VerificationViewController: UIViewController, UITextFieldDelegate {
                 
             }
         }
+        print("Proceed button tapped")
     }
 }
 
 extension VerificationViewController: VerificationViewModelDelegate {
-    func didFinishLoading(with result: Result<OtpVarificationModel, Error>) {
+    func otpVerificationLoading(with result: Result<OtpVarificationModel, Error>) {
         switch result {
         case .success(let data):
             // Check if verificationResult is not nil and safely unwrap the token
@@ -377,10 +403,12 @@ extension VerificationViewController: VerificationViewModelDelegate {
                     print("OTP Verification successful: \(token)")
                     UserDefaults.standard.set(token, forKey: "token")
                     UserDefaults.standard.set(customerID, forKey: "customerID")
+                    print("customerId save succysfully: \(customerID)")
                     UserDefaults.standard.set(isRefferalScreen, forKey: "isRefferalScreen")
                     userDetailViewModel?.getUserDetails()
 //                    countdownLabel.isHidden = false
                 }
+                
             } else {
                 // If token is nil, show error message
                 let alert = UIAlertController(title: "Error", message: "Token missing in the response.", preferredStyle: .alert)
@@ -403,39 +431,33 @@ extension VerificationViewController: UserDetailsModelDelegate {
         switch result {
         case .success(let data):
             // Encode object
-            if let userData = data.result {
+            if let userData = data.userDetailsModelResult {
                 self.userDetailsModelResult = userData
                 
-                do {
-                    let encoder = JSONEncoder()
-                    let encodedData = try encoder.encode(self.userDetailsModelResult)
-                    UserDefaults.standard.set(encodedData, forKey: "userDetails")
-                    DispatchQueue.main.async {
-                        let alert = UIAlertController(title: "Successful", message: "WELCOME \(self.userDetailsModelResult?.customerFirstName ?? "") \(self.userDetailsModelResult?.customerLastName ?? "")", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                            self.navigateToNormalViewController()}))
-                        self.present(alert, animated: true, completion: nil)
-                    }
-                    
-                } catch {
-                    print("Failed to encode user data: \(error)")
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "Successful", message: "WELCOME \(self.userDetailsModelResult?.customerFirstName ?? "") \(self.userDetailsModelResult?.customerLastName ?? "")", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                        self.navigateToNormalViewController()
+                    }))
+                    self.present(alert, animated: true, completion: nil)
                 }
             }
             
             
         case .failure(let error):
-            printContent("requast error: \(error)")
+            print("requast error: \(error)")
             
         }
     }
 }
 
 extension VerificationViewController : LoginViewModelDelegate {
-    func didfinishLogin(with result: Result<LoginModel, any Error>) {
+    func loginMobileNo(with result: Result<LoginModel, any Error>) {
         switch result {
         case .success(let loginModel):
             // Handle successfull login
             print("Login successful: \(loginModel)")
+
             // Proceed with OTP verification
             if mobileNumberText != nil {
                 self.requestId = loginModel.result?.reqID
@@ -443,7 +465,7 @@ extension VerificationViewController : LoginViewModelDelegate {
                 self.countdownLabel.isHidden = false
             }
         case .failure(let error):
-            printContent("requast error: \(error)")
+            print("requast error: \(error)")
         }
     }
 }

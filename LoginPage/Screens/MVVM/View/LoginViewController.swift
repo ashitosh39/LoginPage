@@ -123,7 +123,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         // Instantiate the VerificationViewController from storyboard
         if let vvc = self.storyboard?.instantiateViewController(withIdentifier: "VerificationViewController") as? VerificationViewController {
             // Pass the mobile number to the VerificationViewController
-            vvc.mobileNumberText = withData.mobile
+            vvc.mobileNumberText = enterMobileNO.text
             vvc.requestId = withData.reqID
             self.navigationController?.pushViewController(vvc, animated: true)
             // Navigate to the VerificationViewController
@@ -168,7 +168,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
 
 extension LoginViewController: LoginViewModelDelegate {
-    func didfinishLogin(with result: Result<LoginModel, any Error>) {
+    func loginMobileNo(with result: Result<LoginModel, any Error>) {
         switch result {
         case .success(let data):
             if let loginResult = data.result {

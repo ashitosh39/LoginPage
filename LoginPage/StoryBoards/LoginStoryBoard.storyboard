@@ -69,7 +69,7 @@
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="7447370961" placeholder="Please enter phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="u8p-xT-akV">
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Please enter phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="u8p-xT-akV">
                                         <rect key="frame" x="48" y="561" width="180" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="pCI-jX-VaW"/>
@@ -703,7 +703,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JxP-FI-aps">
                                                 <rect key="frame" x="0.0" y="303" width="340" height="101"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.65000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Refrel Code (Optional)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0EI-v6-9uw">
+                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.65000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Referrel Code (Optional)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0EI-v6-9uw">
                                                         <rect key="frame" x="0.0" y="20" width="340" height="25"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="25" id="XTg-ue-QGd"/>
@@ -741,11 +741,23 @@
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yellowarrow" translatesAutoresizingMaskIntoConstraints="NO" id="kmv-gn-VVg">
                                                                 <rect key="frame" x="90.666666666666686" y="0.0" width="59.333333333333343" height="50"/>
                                                             </imageView>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ICx-bN-aCA">
+                                                                <rect key="frame" x="0.0" y="0.0" width="150" height="50"/>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain"/>
+                                                                <connections>
+                                                                    <action selector="referralCodeButton:" destination="w34-eC-oPA" eventType="touchUpInside" id="cSa-Wn-PIG"/>
+                                                                </connections>
+                                                            </button>
                                                         </subviews>
                                                         <color key="backgroundColor" name="appGreenColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="150" id="3lv-d4-bD0"/>
+                                                            <constraint firstItem="ICx-bN-aCA" firstAttribute="leading" secondItem="iRM-O5-5iK" secondAttribute="leading" id="5HQ-7e-kGa"/>
+                                                            <constraint firstItem="ICx-bN-aCA" firstAttribute="top" secondItem="iRM-O5-5iK" secondAttribute="top" id="7Bx-sA-sIR"/>
                                                             <constraint firstAttribute="bottom" secondItem="kmv-gn-VVg" secondAttribute="bottom" id="9KU-Iz-fBn"/>
+                                                            <constraint firstAttribute="trailing" secondItem="ICx-bN-aCA" secondAttribute="trailing" id="CAt-wU-lhN"/>
+                                                            <constraint firstAttribute="bottom" secondItem="ICx-bN-aCA" secondAttribute="bottom" id="Gvd-cn-04I"/>
                                                             <constraint firstAttribute="height" constant="50" id="IN6-8w-vBw"/>
                                                             <constraint firstItem="kmv-gn-VVg" firstAttribute="top" secondItem="iRM-O5-5iK" secondAttribute="top" id="Kga-jE-Pua"/>
                                                             <constraint firstItem="p8h-YN-vha" firstAttribute="top" secondItem="iRM-O5-5iK" secondAttribute="top" constant="8" id="Z2o-oA-lyT"/>
@@ -857,14 +869,14 @@
                         <outlet property="firstName" destination="E2R-fp-H4V" id="7lx-V3-VrW"/>
                         <outlet property="lastName" destination="fLs-im-dhk" id="ilJ-ps-Q5P"/>
                         <outlet property="proceedButton" destination="qS6-98-BQV" id="loK-SN-g4G"/>
+                        <outlet property="referralCodeTextField" destination="7iV-7h-dc5" id="vrb-Mw-ikC"/>
                         <outlet property="referralCodeVerify" destination="iRM-O5-5iK" id="Oc1-Y4-I68"/>
-                        <outlet property="refralCode" destination="7iV-7h-dc5" id="GEn-HB-gIE"/>
                         <outlet property="refrelCodeView" destination="JxP-FI-aps" id="rQz-1G-7pe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f5o-1I-vVZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3655" y="-72"/>
+            <point key="canvasLocation" x="3654.545454545455" y="-72.175732217573227"/>
         </scene>
         <!--Select City View Controller-->
         <scene sceneID="cJb-nj-Yiu">
@@ -1022,7 +1034,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="440" height="956"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="zOk-aX-WvW"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemMintColor"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="tH8-pX-TGh"/>
                 </viewController>
@@ -1081,7 +1093,7 @@
         <!--Dash Board Screen View Controller-->
         <scene sceneID="kdl-N7-CeL">
             <objects>
-                <tabBarController storyboardIdentifier="DashBoardScreenViewController" id="M5E-ct-krN" customClass="DashBoardScreenViewController" customModule="LoginPage" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="DashBoardScreenViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="M5E-ct-krN" customClass="DashBoardScreenViewController" customModule="LoginPage" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="H3R-fL-Ycz">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1152,7 +1164,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="bPQ-RC-sC7" kind="relationship" relationship="rootViewController" id="N6e-Jy-yfu"/>
+                        <segue destination="bPQ-RC-sC7" kind="relationship" relationship="rootViewController" id="DJT-Z4-31B"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="znX-4b-flU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1193,6 +1205,9 @@
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemMintColor">
+            <color red="0.0" green="0.78039215689999997" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

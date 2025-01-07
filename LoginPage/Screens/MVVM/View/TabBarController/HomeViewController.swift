@@ -38,6 +38,7 @@ class HomeViewController: UIViewController {
            containerView.isHidden = !isContainerViewOpen
         
         sideMenuBarButton.isHidden = isContainerViewOpen
+        tabBarController?.tabBar.isHidden = isContainerViewOpen
        }
        
        // Method to handle tap outside the container view
@@ -52,6 +53,7 @@ class HomeViewController: UIViewController {
                    
                    // Show the sideMenuBarButton again when the container is hidden
                    sideMenuBarButton.isHidden = false
+                   tabBarController?.tabBar.isHidden = false
                }
            }
        }

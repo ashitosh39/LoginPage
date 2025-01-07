@@ -1,8 +1,8 @@
 //
-//  LounchScreenViewController.swift
+//  SplashScreenViewController.swift
 //  LoginPage
 //
-//  Created by Digitalflake on 19/11/24.
+//  Created by Digitalflake on 07/01/25.
 //
 
 import UIKit
@@ -29,7 +29,7 @@ class SplashScreenViewController: UIViewController {
             print("Token not found")
             // Redirect to login page
             DispatchQueue.main.async{
-                if let LoginViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
+                if let LoginViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? MobileNoLoginViewController {
                     self.navigationController?.pushViewController(LoginViewController, animated: true)
                 }
             }
@@ -96,6 +96,3 @@ extension SplashScreenViewController: UserDetailsModelDelegate {
 
 
  
-
-
-

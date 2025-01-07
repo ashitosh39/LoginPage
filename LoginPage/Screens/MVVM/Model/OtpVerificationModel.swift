@@ -1,9 +1,10 @@
 //
-//  varification.swift
+//  OtpVerificationModel.swift
 //  LoginPage
 //
-//  Created by Digitalflake on 13/11/24.
+//  Created by Digitalflake on 07/01/25.
 //
+
 
 import Foundation
 
@@ -59,10 +60,3 @@ struct OTPResponsResult: Codable {
         self.isRefferalScreen = try container.decodeIfPresent(Bool.self, forKey: .isRefferalScreen)
     }
 }
-
-
-
-
-
-
-

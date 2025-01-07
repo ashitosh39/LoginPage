@@ -2,12 +2,10 @@
 //  WareHouseModel.swift
 //  LoginPage
 //
-//  Created by Digitalflake on 23/12/24.
+//  Created by Digitalflake on 07/01/25.
 //
 
 import Foundation
-
-// MARK: - Welcome
 struct House: Codable {
     var status: Int?
     var message: String?

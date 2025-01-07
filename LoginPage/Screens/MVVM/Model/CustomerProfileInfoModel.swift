@@ -2,12 +2,10 @@
 //  CustomerProfileInfoModel.swift
 //  LoginPage
 //
-//  Created by Digitalflake on 26/12/24.
+//  Created by Digitalflake on 07/01/25.
 //
 
 import Foundation
-
-
 // MARK: - Welcome
 struct Customer: Codable {
     var status: Int?
@@ -61,4 +59,3 @@ struct CustomerDetails: Codable {
         self.referalCode = try container.decodeIfPresent(String.self, forKey: .referalCode)
     }
 }
-

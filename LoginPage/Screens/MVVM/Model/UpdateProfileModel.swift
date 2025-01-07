@@ -2,12 +2,10 @@
 //  UpdateProfileModel.swift
 //  LoginPage
 //
-//  Created by Digitalflake on 27/11/24.
+//  Created by Digitalflake on 07/01/25.
 //
 
-//import Foundation
-//
-//
+import Foundation
 //// MARK: - Welcome
 //struct ReferralCode: Codable {
 //    var status: Int?
@@ -24,7 +22,7 @@
 //        case message
 //        case result
 //    }
-//    
+//
 //    init(from decoder: any Decoder) throws {
 //        let container = try decoder.container(keyedBy: CodingKeys.self)
 //        self.status = try container.decodeIfPresent(Int.self, forKey: .status)

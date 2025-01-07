@@ -26,14 +26,22 @@ class SelectCityCollectionViewCell: UICollectionViewCell {
                 tickImage.isHidden = true
             }
         }
+    
     }
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        let maskPath = UIBezierPath(roundedRect: cityImage.bounds,
+                                        byRoundingCorners: [.topLeft, .topRight],
+                                        cornerRadii: CGSize(width: 40, height: 40))
+           
+           let maskLayer = CAShapeLayer()
+           maskLayer.path = maskPath.cgPath
+           cityImage.layer.mask = maskLayer
      
         tickImage.isHidden = true
         self.contentView.backgroundColor = UIColor.white  // Change to default color (white)
 }
+   
 }
 

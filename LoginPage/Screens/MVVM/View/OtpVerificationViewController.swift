@@ -1,8 +1,8 @@
 //
-//  VarificationViewController.swift
+//  OtpVerificationViewController.swift
 //  LoginPage
 //
-//  Created by Digitalflake on 13/11/24.
+//  Created by Digitalflake on 07/01/25.
 //
 
 import UIKit
@@ -326,17 +326,17 @@ class VerificationViewController: UIViewController, UITextFieldDelegate {
 //    func navigateToNormalViewController() {
 //        if self.userDetailsModelResult?.customerFirstName?.lowercased() == "humpy" && self.userDetailsModelResult?.customerLastName?.lowercased() == "customer"{
 ////            if userDetailsModelResult?.customerFirstName == "Humpy" && userDetailsModelResult?.customerLastName == "Customer"{
-//          
+//
 //            // redirect to updateProfileViewController
 //                DispatchQueue.main.async{
 //                    if let updateProfileView = self.storyboard?.instantiateViewController(withIdentifier: "UpdateProfileViewController") as? UpdateProfileViewController {
-//                        
+//
 //                        updateProfileView.userdata = self.userDetailsModelResult
 //                        self.navigationController?.pushViewController(updateProfileView, animated: true)
 //                    }
 ////                }
 //            }
-//            
+//
 //        }
 //        else{
 //            DispatchQueue.main.async{

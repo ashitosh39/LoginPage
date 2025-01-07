@@ -1,12 +1,11 @@
 //
-//  verificationViewModel.swift
+//  OtpVerificationViewModel.swift
 //  LoginPage
 //
-//  Created by Digitalflake on 18/11/24.
+//  Created by Digitalflake on 07/01/25.
 //
 
 import Foundation
-
 
 
 protocol VerificationViewModelDelegate: AnyObject {
@@ -29,7 +28,7 @@ class VerificationViewModel {
         let parameters : [String : Any] = [
             "otp": otp,
             "request_id": requestId
-        ] 
+        ]
         
         guard let postData = try? JSONSerialization.data(withJSONObject: parameters, options: []) else {
             print("Failed to serialize JSON data")
@@ -110,7 +109,7 @@ class VerificationViewModel {
 //                print("Error: \(error.localizedDescription)")
 //                return
 //            }
-//            
+//
 //            guard let data = data else {
 //                print("No data received")
 //                return
@@ -120,7 +119,7 @@ class VerificationViewModel {
 //                if verifyResponse.status == 200, let verifyResult = verifyResponse.result {
 //                    self.delegate?.didfinishloading(with: )
 //                }
-//                    
+//
 //               }
            
             
@@ -148,10 +147,9 @@ class VerificationViewModel {
 //            //                    let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "NextScreenIdentifier")
 //            //                    self.navigationController?.pushViewController(nextVC!, animated: true)
 //            //                }
-//            
+//
 //        }
         
       
     
     
-

@@ -2,13 +2,10 @@
 //  UserDetailsModel.swift
 //  LoginPage
 //
-//  Created by Digitalflake on 18/11/24.
+//  Created by Digitalflake on 07/01/25.
 //
 
-
 import Foundation
-
-// MARK: - Welcome
 struct UserDetailsModel: Codable {
     let status: Int?
     let message: String?
@@ -313,7 +310,7 @@ struct DeliveryBoyDetails: Codable {
 
 // MARK: - ProfileDetails
 //struct ProfileDetails: Codable {
-//    
+//
 //}
 
 // MARK: - Encode/decode helpers

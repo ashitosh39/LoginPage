@@ -2,7 +2,7 @@
 //  UpdateProfileViewController.swift
 //  LoginPage
 //
-//  Created by Digitalflake on 19/11/24.
+//  Created by Digitalflake on 07/01/25.
 //
 //9588664712
 import UIKit
@@ -287,7 +287,7 @@ extension UpdateProfileViewController : UserDetailsModelDelegate{
 //    var userdata: UserDetailsModelResult?
 //    var customer = [Customer].self
 //    var customerProfileViewModel: CustomerProfileViewModel?
-//    
+//
 //    var originalViewYPosition: CGFloat = 0
 //
 //    override func viewDidLoad() {
@@ -328,7 +328,7 @@ extension UpdateProfileViewController : UserDetailsModelDelegate{
 //    @objc func keyboardWillShow(_ notification: Notification) {
 //        if let userInfo = notification.userInfo,
 //           let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
-//            
+//
 //            let keyboardHeight = keyboardFrame.height + 30
 //            if let mobileTextFieldYPosition = firstName.superview?.convert(firstName.frame.origin, to: self.view).y {
 //                let spaceBelowTextField = self.view.frame.height - mobileTextFieldYPosition - firstName.frame.height
@@ -363,7 +363,7 @@ extension UpdateProfileViewController : UserDetailsModelDelegate{
 //            showAlert(message: "Please fill in all fields.")
 //            return
 //        }
-//        
+//
 //        // Call the customerProfile method from the ViewModel with the unwrapped values
 //        customerProfileViewModel?.customerProfile(firstName: firstName, lastName: lastName, email: email)
 //    }

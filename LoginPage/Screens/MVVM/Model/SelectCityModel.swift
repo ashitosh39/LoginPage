@@ -2,10 +2,10 @@
 //  SelectCityModel.swift
 //  LoginPage
 //
-//  Created by Digitalflake on 20/12/24.
+//  Created by Digitalflake on 07/01/25.
 //
-//import Foundation
-//
+
+import Foundation
 //// Model for the response
 //struct CityModel: Codable {
 //    var status: Int?
@@ -89,4 +89,3 @@ struct CitiesResults: Codable {
         try container.encodeIfPresent(self.status, forKey: .status)
     }
 }
-

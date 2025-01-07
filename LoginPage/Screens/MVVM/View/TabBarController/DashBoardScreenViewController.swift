@@ -2,8 +2,9 @@
 //  DashBoardScreenViewController.swift
 //  LoginPage
 //
-//  Created by Digitalflake on 24/12/24.
+//  Created by Digitalflake on 07/01/25.
 //
+
 
 import UIKit
 
@@ -11,8 +12,9 @@ class DashBoardScreenViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("DashBoardScreenViewController")
-       
+        print("DashBoardScreenViewControllerrrrrr")
+        self.navigationItem.hidesBackButton = true
+        
     }
     
 

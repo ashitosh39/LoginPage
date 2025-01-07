@@ -1,14 +1,11 @@
 //
-//  Login.swift
+//  LoginModel.swift
 //  LoginPage
 //
-//  Created by Digitalflake on 13/11/24.
+//  Created by Digitalflake on 07/01/25.
 //
 
-
 import Foundation
-
-
 // MARK: - Welcome
 struct LoginModel: Codable {
     

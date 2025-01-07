@@ -1,12 +1,11 @@
 //
-//  ViewModelFile.swift
+//  LoginViewModel.swift
 //  LoginPage
 //
-//  Created by Digitalflake on 15/11/24.
+//  Created by Digitalflake on 07/01/25.
 //
 
 import Foundation
-
 protocol LoginViewModelDelegate: AnyObject {
     func loginMobileNo(with : Result <LoginModel, Error>)
 }

@@ -1,13 +1,13 @@
 //
-//  ViewController.swift
+//  MobileNoLoginViewController.swift
 //  LoginPage
 //
-//  Created by Digitalflake on 12/11/24.
+//  Created by Digitalflake on 07/01/25.
 //
 
 import UIKit
 
-class LoginViewController: UIViewController, UITextFieldDelegate {
+class MobileNoLoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var enterMobileNO: UITextField!
     @IBOutlet weak var loginBtn: UIControl!
@@ -130,8 +130,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             
         }
     }
-    @IBAction func checkmarkButtonTapped(_ sender: UIButton) {
-        // Toggle the checkmark selected state
+   
+    @IBAction func checkmarkButtonTapped(_ sender: Any) {
+    
+    // Toggle the checkmark selected state
            isCheckmarkSelected.toggle()
            
            // Update the button's image based on the selected state
@@ -167,7 +169,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     }
 
-extension LoginViewController: LoginViewModelDelegate {
+extension MobileNoLoginViewController: LoginViewModelDelegate {
     func loginMobileNo(with result: Result<LoginModel, any Error>) {
         switch result {
         case .success(let data):

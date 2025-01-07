@@ -1,9 +1,11 @@
 //
-//  UpdateProfileViewModel.swift
+//  VerifyReferralCodeViewModel.swift
 //  LoginPage
 //
-//  Created by Digitalflake on 19/11/24.
+//  Created by Digitalflake on 07/01/25.
 //
+
+
 import Foundation
 
 protocol ReferralCodeViewModelDelegate: AnyObject {
@@ -156,22 +158,22 @@ class ReferralCodeViewModel {
 //}
 //
 //class ReferralCodeViewModel {
-//    
+//
 //    weak var delegate: ReferralCodeViewModelDelegate?
 //    private var jsonDecoder: JSONDecoder
-//    
+//
 //    init(delegate: ReferralCodeViewModelDelegate? = nil) {
 //        self.delegate = delegate
 //        self.jsonDecoder = JSONDecoder()  // Initialize JSONDecoder here
 //    }
-//    
+//
 //    func verifyReferralCode(withReferralCode referralCode: String) {
 //        // Construct the URL with query parameter for the referral code
 //        guard let referralUrl = URL(string: "https://qa-api.humpyfarms.com/api/configFeatures/validate/referralCode?code=\(referralCode)") else {
 //            print("Invalid URL")
 //            return
 //        }
-//        
+//
 //        // Get the authorization token from UserDefaults
 //       guard let token = UserDefaults.standard.string(forKey: "token") as? String else {
 //           print("No token found in Userdefaults")
@@ -184,7 +186,7 @@ class ReferralCodeViewModel {
 //        request.addValue("iOS/1.5.7/18.0.1", forHTTPHeaderField: "User-Agent")
 //        request.setValue(token, forHTTPHeaderField: "Authorization")
 //        request.httpMethod = "GET"  // Using GET method here
-//        
+//
 //        // Start the network task
 //        let task = URLSession.shared.dataTask(with: request) { data, response, error in
 //            // Handle error if no data is returned
@@ -193,7 +195,7 @@ class ReferralCodeViewModel {
 ////                self.delegate?.referralCodeVerify(with: .failure(error))
 //                return
 //            }
-//            
+//
 //            // Check if response is valid and status code is 200
 //            if let httpResponse = response as? HTTPURLResponse {
 //                print("Error: Invalid response status code \(httpResponse.statusCode)")
@@ -209,8 +211,8 @@ class ReferralCodeViewModel {
 //            if  let rawString = String(data: data, encoding: .utf8) {
 //                print("Raw Response: \(rawString)")
 //            }
-//          
-//            
+//
+//
 //            // Guard for data availability
 ////            guard let data = data else {
 ////                print("No data received")
@@ -219,14 +221,14 @@ class ReferralCodeViewModel {
 ////                    self.delegate?.referralCodeVerify(with: .failure(error))
 ////                }
 ////                    return
-////                
+////
 ////            }
 //            do {
 //                // Try to decode the response into ReferralCode model
 //                let referralCodeResponse = try self.jsonDecoder.decode(ReferralCode.self, from: data)
 //                DispatchQueue.main.async {
 //                    if let referralCodeResponse = referralCodeResponse.referralResult, ((referralCodeResponse.referralCode?.isEmpty) == nil) {
-//                      
+//
 //                    }
 //                    // If status is 1, it means the referral code is valid
 //                    if referralCodeResponse.status == 1 {
@@ -247,7 +249,7 @@ class ReferralCodeViewModel {
 //                self.delegate?.referralCodeVerify(with: .failure(error))
 //            }
 //        }
-//        
+//
 //        task.resume()
 //    }
 //}

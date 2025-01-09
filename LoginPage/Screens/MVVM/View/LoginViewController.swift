@@ -121,13 +121,14 @@ class MobileNoLoginViewController: UIViewController, UITextFieldDelegate {
     }
     func navigateToVerificationViewController(withData: LoginResponseResult) {
         // Instantiate the VerificationViewController from storyboard
-        if let vvc = self.storyboard?.instantiateViewController(withIdentifier: "VerificationViewController") as? VerificationViewController {
-            // Pass the mobile number to the VerificationViewController
-            vvc.mobileNumberText = enterMobileNO.text
-            vvc.requestId = withData.reqID
-            self.navigationController?.pushViewController(vvc, animated: true)
-            // Navigate to the VerificationViewController
-            
+        DispatchQueue.main.async {
+            if let vvc = self.storyboard?.instantiateViewController(withIdentifier: "VerificationViewController") as? VerificationViewController {
+                // Pass the mobile number to the VerificationViewController
+                vvc.mobileNumberText = self.enterMobileNO.text
+                vvc.requestId = withData.reqID
+                self.navigationController?.pushViewController(vvc, animated: true)
+                // Navigate to the VerificationViewController
+            }
         }
     }
    
@@ -148,33 +149,34 @@ class MobileNoLoginViewController: UIViewController, UITextFieldDelegate {
            
            // Optional debug print to track the state
            print("Checkmark selected: \(isCheckmarkSelected ? "Yes" : "No")")
+      
     }
 
     
     @IBAction func loginBtn(_ sender: Any) {
         guard let mobileNumber = enterMobileNO.text, mobileNumber.count == 10 else {
-            return // No action if the number is not 10 digits
+                return // No action if the number is not 10 digits
+            }
+            
+            // Debugging log to verify loginBtn action is triggered
+            print("Login Button Tapped")
+            
+            // Determine whether to send OTP via WhatsApp or SMS
+            let canSendWhatsApp = isCheckmarkSelected ? 1 : 0
+            
+            // Debugging log to verify the WhatsApp selection state
+            print("Sending OTP via: \(canSendWhatsApp == 1 ? "WhatsApp" : "SMS")")
+            
+            // Call API to send OTP
+            self.loginViewModel?.login(mobile: mobileNumber, canSendWhatsApp: canSendWhatsApp)
         }
-        
-        // Determine whether to send OTP via WhatsApp or SMS
-        let canSendWhatsApp = isCheckmarkSelected ? 1 : 0
-        
-        // Debugging log to verify the WhatsApp selection state
-        print("Sending OTP via: \(canSendWhatsApp == 1 ? "WhatsApp" : "SMS")")
-        
-        // Call API to send OTP
-        self.loginViewModel?.login(mobile: mobileNumber, canSendWhatsApp: canSendWhatsApp)
-    }
-    
-    
-    }
+}
 
 extension MobileNoLoginViewController: LoginViewModelDelegate {
     func loginMobileNo(with result: Result<LoginModel, any Error>) {
         switch result {
         case .success(let data):
             if let loginResult = data.result {
-                // OTP was sent successfully
                 self.loginResult = loginResult
                 DispatchQueue.main.async {
                     let otpSentMessage = self.isCheckmarkSelected ? "The OTP has been successfully sent to your mobile number via WhatsApp." : "The OTP has been successfully sent to your mobile number via SMS."
@@ -202,3 +204,4 @@ extension MobileNoLoginViewController: LoginViewModelDelegate {
         }
     }
 }
+                            

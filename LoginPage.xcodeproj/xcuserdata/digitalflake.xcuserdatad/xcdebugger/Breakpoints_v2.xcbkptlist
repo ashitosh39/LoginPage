@@ -151,22 +151,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C2409B64-0D36-43DB-8E66-FF703151E4D3"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "LoginPage/Screens/MVVM/View/SplashScreenViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
-            landmarkName = "checkUserNew()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "CB7B1142-E46D-4330-B1FA-A4B8B5FE9C3C"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -194,21 +178,83 @@
             endingLineNumber = "31"
             landmarkName = "redirectUI()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "FC7C1358-6FAA-45D4-BFF6-8667B9BDCE09 - 23f9467591644227"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LoginPage.SplashScreenViewController.redirectUI() -&gt; ()"
+                  moduleName = "LoginPage.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/digitalflake/Desktop/LoginPage/LoginPage/Screens/MVVM/View/SplashScreenViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "31"
+                  endingLineNumber = "31">
+               </Location>
+               <Location
+                  uuid = "FC7C1358-6FAA-45D4-BFF6-8667B9BDCE09 - 698b013b86937812"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in LoginPage.SplashScreenViewController.redirectUI() -&gt; ()"
+                  moduleName = "LoginPage.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/digitalflake/Desktop/LoginPage/LoginPage/Screens/MVVM/View/SplashScreenViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "558237E1-3F77-4D0B-99E1-5B9E3B3ACA7A"
+            uuid = "EF99A5FB-CF88-4042-A851-9B742864B19C"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "LoginPage/Screens/MVVM/View/OtpVerificationViewController.swift"
+            filePath = "LoginPage/Screens/MVVM/ViewModel/VerifyReferralCodeViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "408"
-            endingLineNumber = "408"
-            landmarkName = "otpVerificationLoading(with:)"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "validateReferralCode(forReferralCode:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3E8375D3-8094-4A3D-9616-990151F080BB"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LoginPage/Screens/MVVM/View/LoginViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
+            landmarkName = "navigateToVerificationViewController(withData:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1832C295-3C46-4E84-8874-16DA9EC54801"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LoginPage/Screens/MVVM/View/LoginViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
+            landmarkName = "navigateToVerificationViewController(withData:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

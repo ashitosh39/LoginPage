@@ -29,7 +29,7 @@ class SplashScreenViewController: UIViewController {
             print("Token not found")
             // Redirect to login page
             DispatchQueue.main.async{
-                if let LoginViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? MobileNoLoginViewController {
+                if let LoginViewController = self.storyboard?.instantiateViewController(withIdentifier: "MobileNoLoginViewController") as? MobileNoLoginViewController {
                     self.navigationController?.pushViewController(LoginViewController, animated: true)
                 }
             }
@@ -87,6 +87,7 @@ extension SplashScreenViewController: UserDetailsModelDelegate {
             }
         case .failure(let error):
             print("Request error: \(error)")
+           
         }
     }
 }

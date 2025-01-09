@@ -12,7 +12,7 @@ class DashBoardScreenViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("DashBoardScreenViewControllerrrrrr")
+        print("DashBoardScreenViewController")
         self.navigationItem.hidesBackButton = true
         
     }

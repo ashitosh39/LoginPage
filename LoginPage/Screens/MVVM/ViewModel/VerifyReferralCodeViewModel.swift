@@ -33,13 +33,13 @@ class ReferralCodeViewModel {
             return
         }
 
-        guard let token = UserDefaults.standard.string(forKey: "token") else {
+        guard let token = UserDefaults.standard.value(forKey: "token") else {
             print("Token not found")
             return
         }
         
         var request = URLRequest(url: urlString, timeoutInterval: 30)
-        request.addValue(token, forHTTPHeaderField: "Authorization")
+        request.addValue(token as! String, forHTTPHeaderField: "Authorization")
         request.addValue("iOS/1.5.7/18.0.1", forHTTPHeaderField: "User-Agent")
         request.httpMethod = "GET"
         
@@ -87,6 +87,15 @@ class ReferralCodeViewModel {
         task.resume()
     }
 }
+
+
+
+
+
+
+
+
+
 
 
 

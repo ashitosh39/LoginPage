@@ -161,7 +161,7 @@ extension SelectCityViewController: WarehouseDataViewModelDelegate {
                 
             } else {
                 print("Fetched houses: \(houses)")
-                UserDefaults.standard.set(houses.first?.warehouseID, forKey: "warehouseID")
+                UserDefaults.standard.set(houses.first?.warehouseID, forKey: "warehouseID") 
                 self.navigateToVerificationViewController()
                 // Proceed with navigation or other UI updates
             }
